@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser, logoutUser } from '../actions/auth';
+import { loginUser, logoutUser } from '../../actions/auth';
 
 /* todo sækja actions frá ./actions */
 

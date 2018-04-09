@@ -19,6 +19,7 @@ function requestLogin() {
     isAuthenticated: false,
     message: null,
   }
+}
   function receiveLogin(user) {
   return {
     type: LOGIN_SUCCESS,
@@ -77,8 +78,8 @@ export const logoutUser = () => {
     dispatch(logout());
   }
 
-}
 
+}
 /* todo fleiri action */
 
 /* todo async "thunk" fyrir tengingu við vefþjónustu 
