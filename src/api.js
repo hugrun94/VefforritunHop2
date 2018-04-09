@@ -1,7 +1,7 @@
 
 const baseurl = process.env.REACT_APP_SERVICE_URL;
 
-async function get(endpoint) {
+export async function get(endpoint) {
 
   const token = window.localStorage.getItem('token');
 
@@ -45,4 +45,5 @@ export async function post(endpoint, data) {
 
 export default {
   get,
+  post,
 };
