@@ -1,3 +1,8 @@
+# Hópmeðlimir:
+Hugrún Guðmundsdóttir, hug17
+Karen Ósk Pétursdóttir, kop1
+Ragna Ólafsdóttir, rao9
+
 # Hópverkefni 2
 
 Hópverkefni 2 snýst um að útbúa react framenda ofan á vefþjónustu úr hópaverkefni 1. Hægt er að nota eigin lausn áfram eða [nýta sýnilausn](https://github.com/vefforritun/vef2-2018-h1-synilausn).
