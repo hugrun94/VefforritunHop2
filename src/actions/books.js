@@ -63,7 +63,6 @@ function receiveAddBook(book) {
 export const fetchBooks = () => {
   return async (dispatch) => {
     dispatch(requestBooks());
-
     let books;
     try {
       books = await get('/books');
@@ -71,9 +70,11 @@ export const fetchBooks = () => {
       return dispatch(booksError(e))
     }
 
-    dispatch(receiveBooks(books.result));
+    dispatch(receiveBooks(books.result.items));
   }
 }
+
+// asdf passa innskráningu
 
 export const addBook = (title, ISBN13, author, descr, category) => {
   return async (dispatch) => {
