@@ -9,7 +9,8 @@ import Header from './components/header';
 import Home from './routes/home';
 import Login from './routes/login';
 import Profile from './routes/profile';
-import Books from './components/books/Books'
+import Books from './components/books/Books';
+import Book from './components/books/Book';
 import NotFound from './routes/not-found';
 /* todo fleiri routes */
 
@@ -32,7 +33,8 @@ class App extends Component {
             <Route path="/login" exact component={Login} />
             <UserRoute path="/profile" authenticated={authenticated} component={Profile} />
             {/* todo fleiri route */}
-            <Route path="/books" component={Books} />
+            <Route exact path="/books" component={Books} />
+            <Route exact path="/books/:book" component={Book} />
             <Route component={NotFound} />
           </Switch>
         </div>

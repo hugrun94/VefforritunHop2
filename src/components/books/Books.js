@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchBooks } from '../../actions/books';
+import { NavLink } from 'react-router-dom'
 
 import Book from './Book';
 
@@ -22,6 +23,13 @@ class Books extends Component {
     dispatch(fetchBooks());
   }
 
+
+  onHeaderClick = (bookId) => {
+    return (e) => {
+      
+    }
+  }
+
   render() {
     
     const { isFetching, books } = this.props;
@@ -36,16 +44,14 @@ class Books extends Component {
       <section>
         <h2>Bækur</h2>
         <ul>
-          {books.map((book) => {
-            console.log('Render', book.id)
-            return (
-              <Book
-                key={book.id}
-                title={book.title}
-                
-              />
-            )
-          })}
+          {books.map((book) => (
+            <li key={book.id}>
+              <NavLink exact
+                to={`/books/${book.id}`}>
+                {book.title}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </section>
     );
@@ -61,3 +67,12 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Books);
+
+
+/*
+<Book
+                key={book.id}
+                title={book.title}
+                onClick={(this.onHeaderClick(book.id))}
+              />
+              */
