@@ -22,6 +22,30 @@ export async function get(endpoint) {
 
   return { result, status: response.status };
 }
+ function login(username, password) {
+  return new Promise((resolve, reject) => {
+    const user = {
+      name: 'hugrun',
+      username: 'admin',
+    }
+
+    if (username === 'error') {
+      return reject('Villa');
+    }
+
+    if (username === 'admin' && password === '123') {
+      console.log("fdafa")
+      return setTimeout(() => resolve({ loggedin: true, user }), 1000);
+    }
+
+    if (username !== 'admin') {
+      return setTimeout(() => resolve({ loggedin: false, error: 'Notandi ekki til' }), 500);
+    }
+
+    return setTimeout(() => resolve({ loggedin: false, error: 'Vitlaust lykilorð' }), 500);
+  });
+}
+
 
 /* todo aðrar aðgerðir */
 
@@ -46,5 +70,6 @@ export async function post(endpoint, data) {
 
 export default {
   get,
+  login,
   post,
 };
