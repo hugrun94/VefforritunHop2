@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchUsers } from '../../actions/users';
+import { NavLink } from 'react-router-dom'
 
+import User from './User';
 
-/** 
- * /users
- * Hér eiga að sjást allir notendur
- */
+class Users extends Component {
+    
+}
