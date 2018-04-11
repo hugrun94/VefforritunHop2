@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 /* todo sækja actions frá ./actions */
 
-import './Login.css';
+import './Register.css';
 
-class Login extends Component {
+class Register extends Component {
 state = {
     username: '',
     password: '',
@@ -36,7 +36,7 @@ state = {
   }
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, name} = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
 
     if (isAuthenticated) {
@@ -47,9 +47,10 @@ state = {
 
     if (isFetching) {
       return (
-        <p>Skrái inn <em>{username}</em>...</p>
+        <p>Skráir notenda <em>{username}</em>...</p>
       );
     }
+
 
     return (
       <div>
@@ -68,9 +69,10 @@ state = {
             <label htmlFor="password">Lykilorð:</label>
             <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
           </div>
+        
 
           <button disabled={isFetching}>Innskrá</button>
-          <p><Link to='/register'>Nýskráning</Link></p>
+        
         </form>
       </div>
     );
@@ -87,5 +89,4 @@ const mapStateToProps = (state) => {
 
 
 /* todo tengja við redux */
-export default connect(mapStateToProps)(Login);
-
+export default connect(mapStateToProps)(Register);

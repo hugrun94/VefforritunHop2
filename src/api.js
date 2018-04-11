@@ -34,7 +34,6 @@ export async function get(endpoint) {
     }
 
     if (username === 'admin' && password === '123') {
-      console.log("fdafa")
       return setTimeout(() => resolve({ loggedin: true, user }), 1000);
     }
 
