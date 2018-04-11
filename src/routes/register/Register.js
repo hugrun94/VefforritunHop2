@@ -116,17 +116,20 @@ const mapStateToProps = (state) => {
     message: state.auth.message,
   }
 }
-export const addUser = (username, password, name) => {
+
+export const addUser = (username,password,name) => {
   return async (dispatch) => {
     dispatch(requestUser());
+    console.log(user);
 
     let add;
     try {
-      add = await post('/users', password);
+      add = await post('/users', {username,password,name});
        } catch (e) {
       return dispatch(userError(e))
     }
-    dispatch(receiveuser(user.result))
+    console.log(user.result);
+    return dispatch(receiveuser(user.result))
 
   }
 }
