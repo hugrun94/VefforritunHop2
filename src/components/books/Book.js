@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+
 
 //import './Book.css';
 
@@ -63,22 +64,30 @@ export default class Book extends Component {
 
     return (
       <section className="book">
-      <li className="book">
-        <h3 className="book__header">{bookData.title}</h3>
-        <p>Eftir {bookData.author}</p>
-        <p>ISBN13: {bookData.isbn13}</p>
-        <p>{bookData.categorytitle}</p>
-        <p>{bookData.description}</p>
-        <p>{bookData.pagecount} síður</p>
-        <p>Gefin út {bookData.published}</p>
-        <p>Tungumál: {bookData.language}</p>
-      </li>
+        <li className="book">
+          <h3 className="book__header">{bookData.title}</h3>
+          <p>Eftir {bookData.author}</p>
+          <p>ISBN13: {bookData.isbn13}</p>
+          <p>{bookData.categorytitle}</p>
+          <p>{bookData.description}</p>
+          <p>{bookData.pagecount} síður</p>
+          <p>Gefin út {bookData.published}</p>
+          <p>Tungumál: {bookData.language}</p>
+        </li>
 
-      <NavLink exact
-        to={`/books/${bookData.id}/edit`}>
-        Breyta bók
-      </NavLink>
+        <NavLink exact
+          to={`/books/${bookData.id}/edit`}>
+          Breyta bók
+        </NavLink><br></br>
+      
+        <button className="book_button">
+          <NavLink to="../books">
+          Til baka
+          </NavLink>
+        </button>
       </section>
     );
   }
 }
+
+// asdf útfæra lesin bók

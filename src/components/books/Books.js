@@ -18,9 +18,28 @@ class Books extends Component {
     }
   }*/
 
+  state = { 
+    page: 1,
+    offset: 0,
+  };
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchBooks());
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.params !== prevProps.match.params) {
+      this.setState({ loading: true });
+
+      try {
+        const data = await this.fetchData();
+        this.setState({ data, loading: false });
+      } catch (error) {
+        console.error('Error fetching book', error);
+        this.setState({ error: true, loading: false });
+      }
+    }
   }
 
 
@@ -30,8 +49,23 @@ class Books extends Component {
     }
   }
 
+  handleClick = async () => {
+    const offset = this.state.offset + 10;
+    const page = this.state.page + 1;
+    this.setState({ offset, page });
+    this.setState({ loading: true });
+
+      try {
+        const bookData = await this.fetchData();
+        this.setState({ bookData, loading: false });
+      } catch (error) {
+        console.error('Error fetching book', error);
+        this.setState({ error: true, loading: false });
+      }
+  }
+
   render() {
-    
+    console.log(this.props.match)
     const { isFetching, books } = this.props;
 
     if (isFetching) {
@@ -39,20 +73,34 @@ class Books extends Component {
         <p>Sæki bækur..</p>
       );
     }
+    console.log(this.state.offset)
+    console.log(this.state.page)
     console.log(books)
+
     return (
       <section>
         <h2>Bækur</h2>
         <ul>
           {books.map((book) => (
-            <li key={book.id}>
-              <NavLink exact
-                to={`/books/${book.id}`}>
-                {book.title}
-              </NavLink>
-            </li>
+            <div>
+              <h3 key={book.id}>
+                <NavLink exact
+                  to={`/books/${book.id}`}>
+                  {book.title}
+                </NavLink>
+              </h3>
+              <span>Eftir {book.author}</span>
+              {book.published && (<span>, gefin út {book.published}</span>)}
+            </div>
           ))}
         </ul>
+        <span>Síða {this.state.page} </span>
+        <button className="book_button" onClick={this.handleClick}>
+          <NavLink exact
+            to={`/books?offset=${10 + this.state.offset}`}>
+            Næsta síða
+          </NavLink>
+        </button>
       </section>
     );
   }
