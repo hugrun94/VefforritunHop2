@@ -2,10 +2,11 @@
 const baseurl = process.env.REACT_APP_SERVICE_URL;
 
 export async function get(endpoint) {
-
+  console.log(baseurl)
   const token = window.localStorage.getItem('token');
 
   const url = `${baseurl}${endpoint}`;
+  console.log(url)
 
   const options = {
     headers: {},

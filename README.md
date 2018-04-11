@@ -1,6 +1,8 @@
 # Hópmeðlimir:
 Hugrún Guðmundsdóttir, hug17
+
 Karen Ósk Pétursdóttir, kop1
+
 Ragna Ólafsdóttir, rao9
 
 # Hópverkefni 2

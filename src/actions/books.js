@@ -31,6 +31,7 @@ function receiveBooks(books) {
 }
 
 
+
 export const BOOKS_ADD_REQUEST = 'BOOKS_ADD_REQUEST';
 export const BOOKS_ADD_ERROR = 'BOOKS_ADD_ERROR';
 export const BOOKS_ADD_SUCCESS = 'BOOKS_ADD_SUCCESS';
@@ -63,7 +64,6 @@ function receiveAddBook(book) {
 export const fetchBooks = () => {
   return async (dispatch) => {
     dispatch(requestBooks());
-
     let books;
     try {
       books = await get('/books');
@@ -71,9 +71,11 @@ export const fetchBooks = () => {
       return dispatch(booksError(e))
     }
 
-    dispatch(receiveBooks(books.result));
+    dispatch(receiveBooks(books.result.items));
   }
 }
+
+// asdf passa innskráningu
 
 export const addBook = (title, ISBN13, author, descr, category) => {
   return async (dispatch) => {
