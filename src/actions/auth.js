@@ -66,10 +66,11 @@ export const loginUser = (username, password) => {
 
     console.log(login)
 
-    if (login.loggedin) {
+    if (login.status === 200) {
       const { user, token } = login.result;
+      console.log('halló', token)
       localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', JSON.stringify(token));
+      localStorage.setItem('token', token);
       dispatch(receiveLogin(user));
     }
   }
