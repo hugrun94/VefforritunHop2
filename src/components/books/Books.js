@@ -21,52 +21,47 @@ class Books extends Component {
   state = { 
     page: 1,
     offset: 0,
+    limit: 0,
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchBooks());
+    dispatch(fetchBooks('/books'));
   }
 
   async componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params !== prevProps.match.params) {
       this.setState({ loading: true });
 
-      try {
+    console.log(this.state.limit)
+
+    const { dispatch } = this.props;
+    dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
+
+      /*try {
         const data = await this.fetchData();
         this.setState({ data, loading: false });
       } catch (error) {
         console.error('Error fetching book', error);
         this.setState({ error: true, loading: false });
-      }
+      }*/
     }
   }
 
 
-  onHeaderClick = (bookId) => {
-    return (e) => {
-      
-    }
-  }
 
   handleClick = async () => {
     const offset = this.state.offset + 10;
     const page = this.state.page + 1;
     this.setState({ offset, page });
     this.setState({ loading: true });
-
-      try {
-        const bookData = await this.fetchData();
-        this.setState({ bookData, loading: false });
-      } catch (error) {
-        console.error('Error fetching book', error);
-        this.setState({ error: true, loading: false });
-      }
   }
 
   render() {
-    console.log(this.props.match)
-    const { isFetching, books } = this.props;
+    console.log(this.props)
+    const { isFetching, books, limit } = this.props;
+
+    console.log(limit)
 
     if (isFetching) {
       return (
@@ -107,10 +102,12 @@ class Books extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.books)
   return {
     isFetching: state.books.isFetching,
     books: state.books.books,
     error: state.books.error,
+    limit: state.books.limit,
   }
 }
 
