@@ -22,7 +22,7 @@ class App extends Component {
 
   render() {
     const { isAuthenticated } = this.props; /* vita hvort notandi sé innskráður */
-
+    console.log(isAuthenticated)
     return (
       <main className="main">
         <Helmet defaultTitle="Bókasafnið" titleTemplate="%s – Bókasafnið" />
@@ -57,3 +57,9 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(connect(mapStateToProps)(App));
+
+
+/*
+<UserRoute path="/books/new" isAuthenticated={isAuthenticated} component={AddBook} />
+<Route exact path="/books/new" component={AddBook} />
+*/

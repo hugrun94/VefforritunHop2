@@ -1,5 +1,5 @@
 
-const baseurl = 'https://hop-verk1.herokuapp.com/';
+const baseurl = 'https://hop-verk1.herokuapp.com';
 
 export async function get(endpoint) {
   console.log(baseurl)
@@ -65,6 +65,7 @@ export async function post(endpoint, data) {
 
   if (token) {
     options.headers['Authorization'] = `Bearer ${token}`;
+    console.log('token halló:', token)
   }
 
   const response = await fetch(url, options);
