@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from '../../actions/auth';
 import { Link } from 'react-router-dom';
+import { addUser } from '../../actions/register';
 
 /* todo sækja actions frá ./actions */
 
 import './Register.css';
-import { post } from '../../api';
 
-export const NEWUSER_REQUEST = 'NEWUSER_REQUEST';
-export const NEWUSER_ERROR = 'NEWUSER_ERROR';
-export const NEWUSER_FAILURE = 'NEWUSER_FAILURE';
-export const NEWUSER_SUCCESS = 'NEWUSER_SUCCESS';
 const user = window.localStorage.getItem('user');
 
 class Register extends Component {
@@ -82,57 +78,11 @@ state = {
   }
 }
 
-function requestUser() {
-  return {
-    type: NEWUSER_REQUEST,
-    isFetching: true,
-    isAuthenticated: false,
-    message: null,
-  }
-}
-  function receiveuser(user) {
-  return {
-    type: NEWUSER_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true,
-    user,
-    message: null,
-  }
-}
-
-function userError(message) {
-  return {
-    type: NEWUSER_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
-    message
-  }
-}
-
 const mapStateToProps = (state) => {
   return {
     isFetching: state.auth.isFetching,
     isAuthenticated: state.auth.isAuthenticated,
     message: state.auth.message,
-  }
-}
-
-export const addUser = (username,password,name) => {
-  return async (dispatch) => {
-    dispatch(requestUser());
-    console.log(user);
-
-    let user;
-    try {
-      user = await post('users', {username,password,name});
-          console.log(user);
-
-       } catch (e) {
-      return dispatch(userError(e))
-    }
-    console.log(user.result);
-    return dispatch(receiveuser(user.result))
-
   }
 }
 
