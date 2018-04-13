@@ -1,61 +1,52 @@
 import { get, post } from '../api';
 
-export const BOOKS_REQUEST = 'BOOKS_REQUEST';
-export const BOOKS_ERROR = 'BOOKS_ERROR';
-export const BOOKS_SUCCESS = 'BOOKS_SUCCESS';
+export const BOOK_REQUEST = 'BOOK_REQUEST';
+export const BOOK_ERROR = 'BOOK_ERROR';
 export const BOOK_SUCCESS = 'BOOK_SUCCESS';
 
-function requestBooks() {
+function requestBook() {
   return {
-    type: BOOKS_REQUEST,
+    type: BOOK_REQUEST,
     isFetching: true,
     error: null,
   }
 }
 
-function booksError(error) {
+function bookError(error) {
   return {
-    type: BOOKS_ERROR,
+    type: BOOK_ERROR,
     isFetching: true,
-    books: [],
+    book: [],
     error: error,
   }
 }
 
-function receiveBooks(books) {
-  return {
-    type: BOOKS_SUCCESS,
-    isFetching: false,
-    books,
-    error: null,
-  }
-}
-
-function receiveBook(book) {
+function receiveBook(book, limit) {
   return {
     type: BOOK_SUCCESS,
     isFetching: false,
     book,
     error: null,
+    limit,
   }
 }
 
 
-export const BOOKS_ADD_REQUEST = 'BOOKS_ADD_REQUEST';
-export const BOOKS_ADD_ERROR = 'BOOKS_ADD_ERROR';
-export const BOOKS_ADD_SUCCESS = 'BOOKS_ADD_SUCCESS';
+export const BOOK_ADD_REQUEST = 'BOOK_ADD_REQUEST';
+export const BOOK_ADD_ERROR = 'BOOK_ADD_ERROR';
+export const BOOK_ADD_SUCCESS = 'BOOK_ADD_SUCCESS';
 
 function addingBook(book) {
   return {
-    type: BOOKS_ADD_REQUEST,
+    type: BOOK_ADD_REQUEST,
     isAdding: false,
     errors: null,
   }
 }
 
-function addBooksError(errors) {
+function addBookError(errors) {
   return {
-    type: BOOKS_ADD_ERROR,
+    type: BOOK_ADD_ERROR,
     isAdding: false,
     errors,
   }
@@ -80,21 +71,7 @@ export const fetchBooks = (endpoint) => {
       return dispatch(booksError(e))
     }
 
-    dispatch(receiveBooks(books.result.items));
-  }
-}
-
-export const fetchBook = (endpoint) => {
-  return async (dispatch) => {
-    dispatch(requestBooks());
-    let books;
-    try {
-      books = await get(endpoint);
-    } catch (e) {
-      return dispatch(booksError(e))
-    }
-    
-    dispatch(receiveBook(books.result));
+    dispatch(receiveBooks(books.result.items, books.result.limit));
   }
 }
 

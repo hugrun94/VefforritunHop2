@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchBook } from '../../actions/books';
 import { NavLink } from 'react-router-dom';
 
 
 //import './Book.css';
 
-const url = process.env.REACT_APP_SERVICE_URL;
+//const url = process.env.REACT_APP_SERVICE_URL;
 
-export default class Book extends Component {
+class Book extends Component {
   static propTypes = {
     title: PropTypes.string,
     
@@ -19,22 +21,30 @@ export default class Book extends Component {
   }
 
   state = {
-    bookData: null,
     loading: true,
   }
 
   async componentDidMount() {
-    try {
-      const bookData = await this.fetchBook();
-      this.setState({ bookData, loading: false });
+    const {
+      match: {
+        params: {
+          book = '',
+        } = {},
+      } = {},
+    } = this.props;
+    const { dispatch } = this.props;
+    dispatch(fetchBook(`/books/${book}`));
+    /*try {
+      const book = await this.fetchBook();
+      this.setState({ book, loading: false });
     } catch (error) {
       console.error('Error fetching book', error);
       this.setState({ error: true, loading: false });
-    }
+    }*/
   }
 
 
-  fetchBook = async () => {
+  /*fetchBook = async () => {
     const {
       match: {
         params: {
@@ -45,12 +55,12 @@ export default class Book extends Component {
     const response = await fetch(`${url}/books/${book}`);
     const data = await response.json();
     return data;
-  }
+  }*/
 
 
 
   render() {
-    const { bookData, loading, error } = this.state;
+    const { book, loading, error } = this.props;
 
     if (loading) {
       return (<div>Sæki bók</div>);
@@ -61,22 +71,24 @@ export default class Book extends Component {
     }
     const { title,  } = this.props;
     
+    console.log(book)
 
     return (
       <section className="book">
         <li className="book">
-          <h3 className="book__header">{bookData.title}</h3>
-          <p>Eftir {bookData.author}</p>
-          <p>ISBN13: {bookData.isbn13}</p>
-          <p>{bookData.categorytitle}</p>
-          <p>{bookData.description}</p>
-          <p>{bookData.pagecount} síður</p>
-          <p>Gefin út {bookData.published}</p>
-          <p>Tungumál: {bookData.language}</p>
+          <h3 className="book__header">{book.title}</h3>
+          <p>Eftir {book.author}</p>
+          <p>ISBN13: {book.isbn13}</p>
+          <p>{book.categorytitle}</p>
+          <p>{book.description}</p>
+          <p>{book.pagecount} síður</p>
+          <p>Gefin út {book.published}</p>
+          <p>Tungumál: {book.language}</p>
         </li>
 
         <NavLink exact
-          to={`/books/${bookData.id}/edit`}>
+          to={`/books/${book.id}/edit`}
+          params={{book }}>
           Breyta bók
         </NavLink><br></br>
       
@@ -89,5 +101,17 @@ export default class Book extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  console.log(state.books)
+  return {
+    isFetching: state.books.isFetching,
+    book: state.books.book,
+    error: state.books.error,
+  }
+}
+
+export default connect(mapStateToProps)(Book);
 
 // asdf útfæra lesin bók

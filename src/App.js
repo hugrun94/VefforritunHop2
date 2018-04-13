@@ -12,6 +12,7 @@ import Profile from './routes/profile';
 import Register from './routes/register/';
 import Books from './components/books/Books';
 import Book from './components/books/Book';
+import AddBook from './components/books/AddBook';
 import NotFound from './routes/not-found';
 /* todo fleiri routes */
 
@@ -20,7 +21,7 @@ import './App.css';
 class App extends Component {
 
   render() {
-    const authenticated = false; /* vita hvort notandi sé innskráður */
+    const { isAuthenticated } = this.props; /* vita hvort notandi sé innskráður */
 
     return (
       <main className="main">
@@ -32,11 +33,13 @@ class App extends Component {
           <Switch location={this.props.location}>
             <Route path="/" exact component={Home} />
             <Route path="/login" exact component={Login} />
-            <UserRoute path="/profile" authenticated={authenticated} component={Profile} />
+            <UserRoute path="/profile" isAuthenticated={isAuthenticated} component={Profile} />
             <Route path="/register" exact component={Register} />
             {/* todo fleiri route */}
             <Route exact path="/books" component={Books} />
+            <UserRoute path="/books/new" isAuthenticated={isAuthenticated} component={AddBook} />
             <Route exact path="/books/:book" component={Book} />
+            <Route exact path="/books/:book/edit" component={AddBook} />
             <Route component={NotFound} />
           </Switch>
         </div>
@@ -47,7 +50,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  /* todo stilla redux ef það er notað */
+  return {
+    ...state,
+    isAuthenticated: state.auth.isAuthenticated,
+  }
 }
 
 export default withRouter(connect(mapStateToProps)(App));

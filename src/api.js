@@ -51,6 +51,9 @@ export async function get(endpoint) {
 export async function post(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
 
+  const token = window.localStorage.getItem('token');
+  console.log(token)
+
   const options = {
     body: JSON.stringify(data),
     headers: {
@@ -59,7 +62,9 @@ export async function post(endpoint, data) {
     method: 'POST',
   };
 
-  // asdf breyta header ef innskráður
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+  }
 
   const response = await fetch(url, options);
   const result = await response.json();
