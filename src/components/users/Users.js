@@ -5,15 +5,19 @@ import { NavLink } from 'react-router-dom'
 
 import User from './User';
 
+console.log("HALLO");
+
 class Users extends Component {
+
     state = {
       page: 1,
       offset: 0,
     }
 
     componentDidMount(){
-        const { dispatch } = this.props;
-        dispatch(fetchUsers());
+      
+      const { dispatch } = this.props;
+      dispatch(fetchUsers());
     }
 
     async componentDidUpdate(prevProps, prevState) {
@@ -24,7 +28,7 @@ class Users extends Component {
           const data = await this.fetchData();
           this.setState({ data, loading: false });
         } catch (error) {
-          console.error('Error fetching book', error);
+          console.error('Error fetching user', error);
           this.setState({ error: true, loading: false });
         }
       }
@@ -46,12 +50,13 @@ class Users extends Component {
             const userData = await this.fetchData();
             this.setState({ userData, loading: false });
           } catch (error) {
-            console.error('Error fetching book', error);
+            console.error('Error fetching user', error);
             this.setState({ error: true, loading: false });
           }
       }
 
       render(){
+        console.log("hallo");
         const { isFetching, users } = this.props;
 
         if (isFetching) {
@@ -67,7 +72,7 @@ class Users extends Component {
           <section>
             <h2>Notendur</h2>
             <ul>
-              {books.map((user) => (
+              {users.map((user) => (
                 <li key={user.id}>
                   <NavLink exact
                     to={`/users/${user.id}`}>
@@ -80,3 +85,15 @@ class Users extends Component {
         );
       }
 }
+
+const mapStateToProps = (state) => {
+  //console.log(state.users)
+  return {
+    isFetching: state.users.isFetching,
+    users: state.users.users,
+    error: state.users.error,
+    limit: state.users.limit,
+  }
+}
+
+export default connect(mapStateToProps)(Users);

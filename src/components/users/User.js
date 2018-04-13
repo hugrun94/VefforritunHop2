@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
  * Nafn notanda og lítil mynd
  * 
  * User hefur: name, picture, readBooks (fylki)
- *  readBooks hefur: title, rating (int), comment/smá um hana...
+ *  readBooks hefur: title, rating (int), umsögn
  * 
  * "Lesnar bækur" - hér á eftir kemur listi af bókum
  * -Titill bókar
@@ -77,24 +77,9 @@ export default class User extends Component {
         <li className="user">
           <h3 className="user__header">{userData.name}</h3>
           <p>Einkunn: {userData.rating}</p>
-          <p>ISBN13: {userData.isbn13}</p>
-          <p>{userData.categorytitle}</p>
           <p>{userData.description}</p>
-          <p>{userData.pagecount} síður</p>
-          <p>Gefin út {bookData.published}</p>
-          <p>Tungumál: {bookData.language}</p>
-        </li>
 
-        <NavLink exact
-          to={`/books/${bookData.id}/edit`}>
-          Breyta bók
-        </NavLink><br></br>
-      
-        <button className="book_button">
-          <NavLink to="../books">
-          Til baka
-          </NavLink>
-        </button>
+        </li>
       </section>
     );
   }
