@@ -1,5 +1,5 @@
 
-const baseurl = process.env.REACT_APP_SERVICE_URL;
+const baseurl = 'https://hop-verk1.herokuapp.com/';
 
 export async function get(endpoint) {
   console.log(baseurl)
@@ -50,6 +50,10 @@ export async function get(endpoint) {
 
 export async function post(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
+  console.log(data);
+
+  const token = window.localStorage.getItem('token');
+  console.log(token)
 
   const options = {
     body: JSON.stringify(data),
@@ -59,10 +63,14 @@ export async function post(endpoint, data) {
     method: 'POST',
   };
 
-  // asdf breyta header ef innskráður
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+  }
 
   const response = await fetch(url, options);
   const result = await response.json();
+  console.log(response);
+  console.log(result);
 
   return { result, status: response.status };
 }
