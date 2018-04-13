@@ -7,7 +7,7 @@ class Home extends Component {
   	//const { username, password } = this.state;
     //const { isFetching, isAuthenticated, message } = this.props;
     const token = window.localStorage.getItem('user');
-    console.log(token);
+		console.log(token);
     if(token != null){
     	return (
 	      <div>

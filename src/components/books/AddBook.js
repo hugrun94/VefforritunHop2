@@ -37,7 +37,7 @@ class AddBook extends Component {
     //const { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle } = this.state;
     const { isAdding, book, errors } = this.props;
 
-    console.log(book)
+    //console.log(book)
 
     if (isAdding) {
       return (
@@ -128,7 +128,7 @@ class AddBook extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.books.book)
+  //console.log(state.books.book)
   return {
     isAdding: state.books.isAdding,
     book: state.books.book,

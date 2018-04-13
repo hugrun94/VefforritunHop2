@@ -71,7 +71,7 @@ class Book extends Component {
     }
     const { title,  } = this.props;
     
-    console.log(book)
+    //console.log(book)
 
     return (
       <section className="book">
@@ -104,7 +104,7 @@ class Book extends Component {
 
 
 const mapStateToProps = (state) => {
-  console.log(state.books)
+  //console.log(state.books)
   return {
     isFetching: state.books.isFetching,
     book: state.books.book,
