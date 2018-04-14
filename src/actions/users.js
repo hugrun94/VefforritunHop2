@@ -40,8 +40,8 @@ export const fetchUsers = (endpoint) => {
     } catch (e) {
       return dispatch(usersError(e))
     }
-
-    dispatch(receiveUsers(users.result));
+    console.log(users)
+    dispatch(receiveUsers(users.result.items));
   }
 }
 

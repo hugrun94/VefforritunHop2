@@ -6,6 +6,7 @@ const initialState = {
   user: [],
   error: null,
   errors: [],
+  isAuthenticated: false,
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +31,7 @@ export default (state = initialState, action) => {
         isFetching: action.isFetching,
         users: action.users,
         error: action.error,
+        isAuthenticated: action.isAuthenticated,
       };
 
     default:

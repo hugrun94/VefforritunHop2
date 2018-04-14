@@ -43,6 +43,7 @@ class App extends Component {
             <Route exact path="/books/:book" component={Book} />
             <Route exact path="/books/:book/edit" component={AddBook} />
             <UserRoute path="/users" isAuthenticated={isAuthenticated} component={Users} />
+            <UserRoute path="/users/:user" isAuthenticated={isAuthenticated} component={User} />
             <Route component={NotFound} />
           </Switch>
         </div>
