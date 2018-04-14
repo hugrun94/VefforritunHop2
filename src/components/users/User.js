@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {fetchUser } from '../../actions/users';
 import { NavLink } from 'react-router-dom';
 
 /** 
@@ -31,22 +33,30 @@ export default class User extends Component {
   }
 
   state = {
-    userData: null,
     loading: true,
   }
 
   async componentDidMount() {
-    try {
+    const {
+      match: {
+        params: {
+          user = '',
+        } = {},
+      } = {},
+    } = this.props;
+    const { dispatch } = this.props;
+    dispatch(fetchUser(`/users/${user}`))
+    /*try {
       const userData = await this.fetcUser();
       this.setState({ userData, loading: false });
     } catch (error) {
       console.error('Error fetching user', error);
       this.setState({ error: true, loading: false });
-    }
+    }*/
   }
 
 
-  fetchUser = async () => {
+  /*fetchUser = async () => {
     const {
       match: {
         params: {
@@ -58,12 +68,12 @@ export default class User extends Component {
     const data = await response.json();
     return data;
   }
-
+*/
   render() {
-    const { userData, loading, error } = this.state;
+    const { user, loading, error } = this.props;
 
     if (loading) {
-      return (<div>Sæki notanda</div>);
+      return (<div>Sæki notanda...</div>);
     }
 
     if (error) {
@@ -75,11 +85,16 @@ export default class User extends Component {
     return (
       <section className="user">
         <li className="user">
-          <h3 className="user__header">{userData.name}</h3>
-          <p>Einkunn: {userData.rating}</p>
-          <p>{userData.description}</p>
-
+          <h3 className="user__header">{user.name}</h3>
+          <p>Einkunn: {user.rating}</p>
+          <p>{user.description}</p>
         </li>
+
+        <button className="user_button">
+          <NavLink to="../users">
+          Til baka í notendur
+          </NavLink>
+        </button>
       </section>
     );
   }
