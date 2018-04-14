@@ -36,11 +36,12 @@ export const fetchUsers = (endpoint) => {
     let users;
     try {
       users = await get(endpoint);
+      console.log(users)
     } catch (e) {
       return dispatch(usersError(e))
     }
 
-    dispatch(receiveUsers(users.result.items));
+    dispatch(receiveUsers(users.result));
   }
 }
 

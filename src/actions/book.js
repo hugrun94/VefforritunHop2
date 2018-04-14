@@ -27,7 +27,6 @@ function receiveBook(book, limit) {
     isFetching: false,
     book,
     error: null,
-    limit,
   }
 }
 

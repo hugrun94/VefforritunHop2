@@ -28,6 +28,8 @@ class AddBook extends Component {
     const { isAuthenticated } = this.props;
     console.log(isAuthenticated)
 
+    console.log(title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle)
+
     if (isAuthenticated) {
       dispatch(addBook(title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle));
     }

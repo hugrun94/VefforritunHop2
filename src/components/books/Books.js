@@ -21,7 +21,6 @@ class Books extends Component {
   state = { 
     page: 1,
     offset: 0,
-    limit: 0,
   };
 
   componentDidMount() {
@@ -29,24 +28,22 @@ class Books extends Component {
     dispatch(fetchBooks('/books'));
   }
 
-  async componentDidUpdate(prevProps, prevState) {
+  /*async componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params !== prevProps.match.params) {
       this.setState({ loading: true });
 
-    console.log(this.state.limit)
+    //const { dispatch } = this.props;
+    //dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
 
-    const { dispatch } = this.props;
-    dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
-
-      /*try {
-        const data = await this.fetchData();
-        this.setState({ data, loading: false });
+      try {
+        const books = await this.fetchBooks(`/books?offset=${10 + this.state.offset}`);
+        this.setState({ books, loading: false });
       } catch (error) {
         console.error('Error fetching book', error);
         this.setState({ error: true, loading: false });
-      }*/
+      }
     }
-  }
+  }*/
 
 
 
@@ -55,22 +52,19 @@ class Books extends Component {
     const page = this.state.page + 1;
     this.setState({ offset, page });
     this.setState({ loading: true });
+    const { dispatch } = this.props;
+    dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
   }
 
   render() {
-    console.log(this.props)
-    const { isFetching, books, limit } = this.props;
-
-    console.log(limit)
+    const { isFetching, books } = this.props;
 
     if (isFetching) {
       return (
         <p>Sæki bækur..</p>
       );
     }
-    console.log(this.state.offset)
-    console.log(this.state.page)
-    console.log(books)
+    
 
     return (
       <section>
@@ -102,12 +96,10 @@ class Books extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.books)
   return {
     isFetching: state.books.isFetching,
     books: state.books.books,
     error: state.books.error,
-    limit: state.books.limit,
   }
 }
 
