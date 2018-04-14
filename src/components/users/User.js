@@ -46,6 +46,7 @@ export default class User extends Component {
     } = this.props;
     const { dispatch } = this.props;
     dispatch(fetchUser(`/users/${user}`))
+    console.log("notandi: ", user)
     /*try {
       const userData = await this.fetcUser();
       this.setState({ userData, loading: false });
