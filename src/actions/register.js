@@ -1,4 +1,5 @@
 import { post } from '../api';
+import { Route, Redirect } from 'react-router'
 export const NEWUSER_REQUEST = 'NEWUSER_REQUEST';
 export const NEWUSER_ERROR = 'NEWUSER_ERROR';
 export const NEWUSER_FAILURE = 'NEWUSER_FAILURE';
@@ -15,6 +16,7 @@ function requestUser() {
   }
 }
   function receiveuser(user) {
+  	console.log("hugrun")
   return {
     type: NEWUSER_SUCCESS,
     isFetching: false,
@@ -40,14 +42,15 @@ export const addUser = (username,password,name) => {
 
     let user;
     try {
-      user = await post('register', {username,password,name});
-          console.log(user);
+      user = await post('/register', {username,password,name});
+
+      console.log(user);
 
        } catch (e) {
-       	console.log(user.message);
       return dispatch(userError(e))
     }
     console.log(user.result);
+    console.log("dfaklæka")
     return dispatch(receiveuser(user.result))
 
   }

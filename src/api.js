@@ -1,5 +1,5 @@
 
-const baseurl = 'https://hop-verk1.herokuapp.com/';
+const baseurl = 'https://hop-verk1.herokuapp.com';
 
 export async function get(endpoint) {
   console.log(baseurl)
@@ -51,6 +51,7 @@ export async function get(endpoint) {
 export async function post(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
   console.log(data);
+  console.log(url);
 
   const options = {
     body: JSON.stringify(data),
