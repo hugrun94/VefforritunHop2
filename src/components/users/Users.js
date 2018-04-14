@@ -16,52 +16,22 @@ class Users extends Component {
 
     componentDidMount(){
       
-      const { dispatch } = this.props;
-      dispatch(fetchUsers('/users'));
+      const { dispatch, isAuthenticated } = this.props;
+
+      //if (isAuthenticated) {
+        dispatch(fetchUsers('/users'));
+      //}
     }
 
-    async componentDidUpdate(prevProps, prevState) {
-      if (this.props.match.params !== prevProps.match.params) {
-        this.setState({ loading: true });
-  
-        try {
-          const data = await this.fetchData();
-          this.setState({ data, loading: false });
-        } catch (error) {
-          console.error('Error fetching user', error);
-          this.setState({ error: true, loading: false });
-        }
-      }
-    }
 
-    onHeaderClick = (userId) => {
-        return (e) => {
-          
-        }
-      }
-
-      handleClick = async () => {
-        const offset = this.state.offset + 10;
-        const page = this.state.page + 1;
-        this.setState({ offset, page });
-        this.setState({ loading: true });
-    
-          try {
-            const userData = await this.fetchData();
-            this.setState({ userData, loading: false });
-          } catch (error) {
-            console.error('Error fetching user', error);
-            this.setState({ error: true, loading: false });
-          }
-      }
 
       render(){
         
-        const { isFetching, users } = this.props;
+        const { isFetching, users, isAuthenticated } = this.props;
 
         console.log(users)
         let token = localStorage.getItem('token');
-        console.log('token hallo', token)
+        console.log('token hallo', token  )
 
         if (isFetching) {
           return (
@@ -96,7 +66,7 @@ const mapStateToProps = (state) => {
     isFetching: state.users.isFetching,
     users: state.users.users,
     error: state.users.error,
-    limit: state.users.limit,
+    isAuthenticated: state.users.isAuthenticated,
   }
 }
 
