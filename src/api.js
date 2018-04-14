@@ -17,7 +17,7 @@ export async function get(endpoint) {
   }
 
   /* todo framkvæma get */
-  const response = await fetch(url);
+  const response = await fetch(url, options);
   const result = await response.json();
 
   console.log(result)
