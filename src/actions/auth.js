@@ -55,7 +55,7 @@ export const loginUser = (username, password) => {
 
     let login;
     try {
-      login = await api.login(username, password);
+      login = await api.post('/login',{ username, password });
     } catch (e) {
       return dispatch(loginError(e))
     }
@@ -64,9 +64,10 @@ export const loginUser = (username, password) => {
       dispatch(loginError(login.error))
     }
 
-    if (login.loggedin) {
-      const { user } = login;
+    if (login.status === 200) {
+      const { user, token } = login.result;
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
       dispatch(receiveLogin(user));
     }
   }
@@ -75,6 +76,7 @@ export const loginUser = (username, password) => {
 export const logoutUser = () => {
   return async (dispatch) => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     dispatch(logout());
   }
 

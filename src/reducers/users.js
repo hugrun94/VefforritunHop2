@@ -3,8 +3,10 @@ import { USERS_REQUEST, USERS_ERROR, USERS_SUCCESS, USERS_ADD_REQUEST, USERS_ADD
 const initialState = {
   isFetching: false,
   users: [],
+  user: [],
   error: null,
   errors: [],
+  isAuthenticated: false,
 };
 
 export default (state = initialState, action) => {
@@ -19,7 +21,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: action.isFetching,
-        books: action.users,
+        users: action.users,
         error: action.error,
       };
 
@@ -27,8 +29,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: action.isFetching,
-        books: action.users,
+        users: action.users,
         error: action.error,
+        isAuthenticated: action.isAuthenticated,
       };
 
     default:

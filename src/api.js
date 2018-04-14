@@ -2,11 +2,11 @@
 const baseurl = 'https://hop-verk1.herokuapp.com';
 
 export async function get(endpoint) {
-  console.log(baseurl)
   const token = window.localStorage.getItem('token');
 
+  console.log(token)
+
   const url = `${baseurl}${endpoint}`;
-  console.log(url)
 
   const options = {
     headers: {},
@@ -17,8 +17,10 @@ export async function get(endpoint) {
   }
 
   /* todo framkvæma get */
-  const response = await fetch(url);
+  const response = await fetch(url, options);
   const result = await response.json();
+
+  console.log(result)
 
   return { result, status: response.status };
 }
@@ -53,6 +55,10 @@ export async function post(endpoint, data) {
   console.log(data);
   console.log(url);
 
+
+  const token = window.localStorage.getItem('token');
+  console.log(token)
+
   const options = {
     body: JSON.stringify(data),
     headers: {
@@ -61,12 +67,15 @@ export async function post(endpoint, data) {
     method: 'POST',
   };
 
-  // asdf breyta header ef innskráður
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+    console.log('token halló:', token)
+  }
 
   const response = await fetch(url, options);
   const result = await response.json();
-  console.log(response);
-  console.log(result);
+  //console.log(response);
+  //console.log(result);
 
   return { result, status: response.status };
 }

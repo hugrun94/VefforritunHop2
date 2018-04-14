@@ -29,3 +29,32 @@ function receiveUsers(users) {
     error: null,
   }
 }
+
+export const fetchUsers = (endpoint) => {
+  return async (dispatch) => {
+    dispatch(requestUsers());
+    let users;
+    try {
+      users = await get(endpoint);
+      console.log(users)
+    } catch (e) {
+      return dispatch(usersError(e))
+    }
+    console.log(users)
+    dispatch(receiveUsers(users.result.items));
+  }
+}
+
+export const fetchUser = (endpoint) => {
+  return async (dispatch) => {
+    dispatch(requestUsers());
+    let users;
+    try {
+      users = await get(endpoint);
+    } catch (e) {
+      return dispatch(usersError(e))
+    }
+    
+    dispatch(receiveUsers(users.result));
+  }
+}
