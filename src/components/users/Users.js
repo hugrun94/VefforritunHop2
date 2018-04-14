@@ -17,7 +17,7 @@ class Users extends Component {
     componentDidMount(){
       
       const { dispatch } = this.props;
-      dispatch(fetchUsers());
+      dispatch(fetchUsers('/users'));
     }
 
     async componentDidUpdate(prevProps, prevState) {
@@ -56,8 +56,12 @@ class Users extends Component {
       }
 
       render(){
-        console.log("hallo");
+        
         const { isFetching, users } = this.props;
+
+        console.log(users)
+        let token = localStorage.getItem('token');
+        console.log('token hallo', token)
 
         if (isFetching) {
           return (

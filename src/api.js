@@ -4,6 +4,8 @@ const baseurl = 'https://hop-verk1.herokuapp.com';
 export async function get(endpoint) {
   const token = window.localStorage.getItem('token');
 
+  console.log(token)
+
   const url = `${baseurl}${endpoint}`;
 
   const options = {
