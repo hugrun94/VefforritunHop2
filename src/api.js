@@ -20,6 +20,8 @@ export async function get(endpoint) {
   const response = await fetch(url);
   const result = await response.json();
 
+  console.log(result)
+
   return { result, status: response.status };
 }
  function login(username, password) {
