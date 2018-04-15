@@ -82,11 +82,13 @@ export default class User extends Component {
     }
 
     const { name } = this.props;
-
+// ASDF sækja lesnar bækur úr lista yfir lesnar bækur
     return (
       <section className="user">
         <li className="user">
           <h3 className="user__header">{user.name}</h3>
+          <br><h3>Lesnar bækur</h3></br>
+          <p>{}</p>}
           <p>Einkunn: {user.rating}</p>
           <p>{user.description}</p>
         </li>
