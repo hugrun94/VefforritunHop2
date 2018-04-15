@@ -1,5 +1,5 @@
 
-const baseurl = 'https://hop-verk1.herokuapp.com';
+const baseurl = 'https://vefforritunar-api.herokuapp.com';
 
 export async function get(endpoint) {
   const token = window.localStorage.getItem('token');
@@ -82,8 +82,40 @@ export async function post(endpoint, data) {
   return { result, status: response.status };
 }
 
+
+export async function patch(endpoint, data) {
+  const url = `${baseurl}${endpoint}`;
+  console.log(data);
+  console.log(url);
+
+
+  const token = window.localStorage.getItem('token');
+  console.log(token)
+
+  const options = {
+    body: JSON.stringify(data),
+    headers: {
+      'content-type': 'application/json',
+    },
+    method: 'PATCH',
+  };
+
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+    console.log('token halló:', token)
+  }
+
+  const response = await fetch(url, options);
+  const result = await response.json();
+  //console.log(response);
+  //console.log(result);
+
+  return { result, status: response.status };
+}
+
 export default {
   get,
   login,
   post,
+  patch,
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUser, fetchUserBooks } from '../../actions/users';
+import { fetchBooks } from '../../actions/books';
 
 import { NavLink } from 'react-router-dom';
 
@@ -25,7 +26,6 @@ class User extends Component {
   static propTypes = {
     name: PropTypes.string,
     
-    // asdf hvað er match og params?
     match: PropTypes.shape({
       params: PropTypes.shape({
         user: PropTypes.string,
@@ -49,6 +49,7 @@ class User extends Component {
     const { dispatch } = this.props;
     dispatch(fetchUser(`/users/${user}`));
     dispatch(fetchUserBooks(`/users/${user}/read`));
+    dispatch(fetchBooks('/books'));
   }
 
 
@@ -56,8 +57,22 @@ class User extends Component {
 
   render() {
     const { user, readBooks, isFetching, error, books } = this.props;
+    let bookTitles = []
+    for (let i = 0; i < readBooks.length; i++) {
+      for (let j = 0; j < books.length; j++) {
+        if (readBooks[i].book_id === books[j].id) {
+          bookTitles.push({ 
+            book_id: books[j].id, 
+            book_title: books[j].title,
+            rating: readBooks[i].rating,
+            review: readBooks[i].review, 
+          });
+          break;
+        }
+      }
+    }
 
-    console.log(books)
+    console.log(readBooks)
 
     if (isFetching) {
       return (<div>Sæki notanda</div>);
@@ -67,21 +82,21 @@ class User extends Component {
       return (<div>Villa við að sækja notanda</div>);
     }
 
-    const { name } = this.props;
-// ASDF sækja lesnar bækur úr lista yfir lesnar bækur
+
     return (
       <section className="user">
       <h3 className="user__header">{user.name}</h3>
       <h3 className="read__books">Lesnar bækur</h3>
         <ul>
-          {readBooks.map((book) => (
+          {bookTitles.map((book) => (
             <div>
               <h3 key={book.book_id}>
                 <NavLink exact
-                    to={`/books/${book.id}`}>
-                    {book.book_id}
+                    to={`/books/${book.book_id}`}>
+                    {book.book_title}
                 </NavLink>
               </h3>
+              <p>Einkunn: {book.rating}. {book.review}</p>
             </div>
           ))}
         </ul>
