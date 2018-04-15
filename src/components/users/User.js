@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchUser, fetchUserBooks } from '../../actions/users';
 import { NavLink } from 'react-router-dom';
 
 /** 
@@ -18,7 +20,7 @@ import { NavLink } from 'react-router-dom';
 
 const url = process.env.REACT_APP_SERVICE_URL;
 
-export default class User extends Component {
+class User extends Component {
   static propTypes = {
     name: PropTypes.string,
     
@@ -31,22 +33,10 @@ export default class User extends Component {
   }
 
   state = {
-    userData: null,
     loading: true,
   }
 
   async componentDidMount() {
-    try {
-      const userData = await this.fetcUser();
-      this.setState({ userData, loading: false });
-    } catch (error) {
-      console.error('Error fetching user', error);
-      this.setState({ error: true, loading: false });
-    }
-  }
-
-
-  fetchUser = async () => {
     const {
       match: {
         params: {
@@ -54,15 +44,20 @@ export default class User extends Component {
         } = {},
       } = {},
     } = this.props;
-    const response = await fetch(`${url}/users/${user}`);
-    const data = await response.json();
-    return data;
+    console.log('notandi',user)
+    const { dispatch } = this.props;
+    dispatch(fetchUser(`/users/${user}`));
+    dispatch(fetchUserBooks(`/users/${user}/read`));
   }
 
-  render() {
-    const { userData, loading, error } = this.state;
 
-    if (loading) {
+
+  render() {
+    const { user, readBooks, isFetching, error, books } = this.props;
+
+    console.log(books)
+
+    if (isFetching) {
       return (<div>Sæki notanda</div>);
     }
 
@@ -74,13 +69,33 @@ export default class User extends Component {
 
     return (
       <section className="user">
-        <li className="user">
-          <h3 className="user__header">{userData.name}</h3>
-          <p>Einkunn: {userData.rating}</p>
-          <p>{userData.description}</p>
-
-        </li>
+      <h3 className="user__header">{user.name}</h3>
+      <h3 className="read__books">Lesnar bækur</h3>
+        <ul>
+          {readBooks.map((book) => (
+            <div>
+              <h3 key={book.book_id}>
+                <NavLink exact
+                    to={`/books/${book.id}`}>
+                    {book.book_id}
+                </NavLink>
+              </h3>
+            </div>
+          ))}
+        </ul>
       </section>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.users.isFetching,
+    user: state.users.user,
+    error: state.users.error,
+    readBooks: state.users.readBooks,
+    books: state.books.books,
+  }
+}
+
+export default connect(mapStateToProps)(User);
