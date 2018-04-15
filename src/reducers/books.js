@@ -7,7 +7,8 @@ const initialState = {
   book: [],
   error: null,
   errors: [],
-  isAuthenticated: true,
+  isAuthenticated: false,
+  search: null,
 };
 
 export default (state = initialState, action) => {

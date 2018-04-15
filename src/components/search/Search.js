@@ -1,43 +1,39 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchBooks } from '../../actions/books';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
-import Book from './Book';
 
-const queryString = require('query-string');
+class Search extends Component {
 
-class Books extends Component {
+    static propTypes = {
+        //title: PropTypes.string,
+        
+        match: PropTypes.shape({
+          params: PropTypes.shape({
+            query: PropTypes.string,
+          }),
+        }),
+      }
 
-  /*state = {
-    visibleNote: null,
-  }
-
-  onHeaderClick = (noteId) => {
-    return (e) => {
-      const visibleNote = this.state.visibleNote === noteId ? null : noteId;
-      this.setState({ visibleNote });
+    async componentDidMount() {
+        const {
+            match: {
+            params: {
+                query = '',
+            } = {},
+            } = {},
+        } = this.props;
+        const { dispatch } = this.props;
+        dispatch(fetchBooks(`/books?search=${query}`));
+        //dispatch(fetchBooks(`/books?search=${query}`));
     }
-  }*/
 
   state = { 
     page: 1,
     offset: 0,
   };
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    const query = this.props.location.search;
-    console.log(this.props.location.search)
-    const parsedQuery = queryString.parse(query);
-    console.log(parsedQuery)
-    if (query) {
-      dispatch(fetchBooks(`/books?search=${parsedQuery.search}`));
-    }
-    else {
-      dispatch(fetchBooks(`/books?offset=${this.state.offset}`));
-    }
-  }
 
   /*async componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params !== prevProps.match.params) {
@@ -77,7 +73,9 @@ class Books extends Component {
   }
 
   render() {
-    const { isFetching, books } = this.props;
+    const { isFetching, booksResult } = this.props;
+
+    console.log('search')
 
     if (isFetching) {
       return (
@@ -85,12 +83,13 @@ class Books extends Component {
       );
     }
     
+    console.log(booksResult)
 
     return (
       <section>
         <h2>Bækur</h2>
         <ul>
-          {books.map((book) => (
+          {booksResult.map((book) => (
             <div>
               <h3 key={book.id}>
                 <NavLink exact
@@ -124,13 +123,13 @@ class Books extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.books.isFetching,
-    books: state.books.books,
-    error: state.books.error,
+    isFetching: state.search.isFetching,
+    booksResult: state.search.booksResult,
+    error: state.search.error,
   }
 }
 
-export default connect(mapStateToProps)(Books);
+export default connect(mapStateToProps)(Search);
 
 
 /*

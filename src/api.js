@@ -8,6 +8,8 @@ export async function get(endpoint) {
 
   const url = `${baseurl}${endpoint}`;
 
+  console.log(url)
+
   const options = {
     headers: {},
   };
