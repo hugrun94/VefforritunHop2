@@ -1,4 +1,4 @@
-import { NEWUSER_REQUEST, NEWUSER_SUCCESS, NEWUSER_FAILURE } from '../actions/register';
+import { NEWUSER_REQUEST, NEWUSER_SUCCESS, NEWUSER_FAILURE } from './../actions/register';
 const user = JSON.parse(localStorage.getItem('user') || 'null');
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  console.log("rafnar")
   switch (action.type) {
 
     /* todo setja upp reducer */
@@ -19,6 +20,7 @@ export default (state = initialState, action) => {
       };
     case NEWUSER_SUCCESS:
     console.log(action)
+    console.log("fad")
       return {
         ...state,
         isFetching: action.isFetching,

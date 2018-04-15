@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from '../../actions/auth';
-import { Link } from 'react-router-dom';
+import { Link , Redirect} from 'react-router-dom';
 
 /* todo sækja actions frá ./actions */
 

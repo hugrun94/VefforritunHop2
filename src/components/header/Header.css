@@ -1,3 +1,10 @@
 .header {
-  background-color: #dcbe87;
+	display: flex;
+	background-color: #dcbe87;
+	flex-direction:row;
+	align-items:center;
+	justify-content:space-between;
+	height: 80px;
 }
+
+

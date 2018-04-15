@@ -54,7 +54,9 @@ export async function get(endpoint) {
 
 export async function post(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
-  //console.log(data);
+  console.log(data);
+  console.log(url);
+
 
   const token = window.localStorage.getItem('token');
   console.log(token)
