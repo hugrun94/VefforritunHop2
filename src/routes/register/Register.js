@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from '../../actions/auth';
-import { Link } from 'react-router-dom';
+import { Link , Redirect, NavLink} from 'react-router-dom';
 import { addUser } from '../../actions/register';
 
 /* todo sækja actions frá ./actions */
@@ -34,23 +34,29 @@ state = {
     dispatch(addUser(username, password,name));
   }
 
-
   render() {
     const { username, password, name} = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
+    console.log(isAuthenticated);
 
     if (isFetching) {
       return (
         <p>Skráir notenda <em>{username}</em>...</p>
       );
     }
+ 
 
 
     return (
       <div>
-        {message && (
-          <p>{message}</p>
-        )}
+      {message && (
+          <ul>{message.map((errors, i) => (
+            <li key={i}>
+              {errors.message}
+            </li>
+          ))}</ul>
+          )}
+      
 
         <form onSubmit={this.handleSubmit}>
 
@@ -68,10 +74,18 @@ state = {
             <label htmlFor="name">Fullt nafn:</label>
             <input id="name" type="text" name="name" value={name} onChange={this.handleInputChange} />
           </div>
-        
-
-          <button disabled={isFetching}>Innskrá</button>
-        
+        <button className="user_button" onClick={this.handleSubmit}>
+          {!message && ( 
+            <NavLink exact
+            to='/login'>
+            Nýskrá
+          </NavLink>)}
+          {message && (
+        <NavLink exact
+            to='/register'>
+            Nýskrá
+          </NavLink>)}
+        </button>
         </form>
       </div>
     );
