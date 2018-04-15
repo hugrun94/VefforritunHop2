@@ -8,6 +8,7 @@ import {
   USER_READ_SUCCESS, 
 } from '../actions/users';
 
+
 const initialState = {
   isFetching: false,
   users: [],
@@ -73,7 +74,6 @@ export default (state = initialState, action) => {
         error: action.error,
         isAuthenticated: action.isAuthenticated,
       };
-
 
     default:
       return state;

@@ -8,6 +8,8 @@ export const USER_READ_REQUEST = 'USER_READ_REQUEST';
 export const USER_READ_ERROR = 'USER_READ_ERROR';
 export const USER_READ_SUCCESS = 'USER_READ_SUCCESS';
 
+
+
 function requestUsers() {
   return {
     type: USERS_REQUEST,

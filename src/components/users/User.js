@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUser, fetchUserBooks } from '../../actions/users';
+
 import { NavLink } from 'react-router-dom';
 
 /** 
@@ -44,11 +45,12 @@ class User extends Component {
         } = {},
       } = {},
     } = this.props;
-    console.log('notandi',user)
+
     const { dispatch } = this.props;
     dispatch(fetchUser(`/users/${user}`));
     dispatch(fetchUserBooks(`/users/${user}/read`));
   }
+
 
 
 
@@ -66,7 +68,7 @@ class User extends Component {
     }
 
     const { name } = this.props;
-
+// ASDF sækja lesnar bækur úr lista yfir lesnar bækur
     return (
       <section className="user">
       <h3 className="user__header">{user.name}</h3>
@@ -83,6 +85,13 @@ class User extends Component {
             </div>
           ))}
         </ul>
+
+
+        <button className="user_button">
+          <NavLink to="../users">
+          Til baka í notendur
+          </NavLink>
+        </button>
       </section>
     );
   }
