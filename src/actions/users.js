@@ -3,6 +3,7 @@ import { get, post } from '../api';
 export const USERS_REQUEST = 'USERS_REQUEST';
 export const USERS_ERROR = 'USERS_ERROR';
 export const USERS_SUCCESS = 'USERS_SUCCESS';
+export const USER_SUCCESS = 'USER_SUCCESS';
 
 function requestUsers() {
   return {

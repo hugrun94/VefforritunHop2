@@ -1,4 +1,4 @@
-import { USERS_REQUEST, USERS_ERROR, USERS_SUCCESS, USERS_ADD_REQUEST, USERS_ADD_ERROR, USERS_ADD_SUCCESS } from '../actions/users';
+import { USERS_REQUEST, USERS_ERROR, USERS_SUCCESS, USER_SUCCESS } from '../actions/users';
 
 const initialState = {
   isFetching: false,
@@ -32,6 +32,14 @@ export default (state = initialState, action) => {
         users: action.users,
         error: action.error,
         isAuthenticated: action.isAuthenticated,
+      };
+
+      case USER_SUCCESS:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        user: action.user,
+        error: action.error,
       };
 
     default:
