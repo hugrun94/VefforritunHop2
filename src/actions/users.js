@@ -7,7 +7,7 @@ export const USER_SUCCESS = 'USER_SUCCESS';
 export const USER_READ_REQUEST = 'USER_READ_REQUEST';
 export const USER_READ_ERROR = 'USER_READ_ERROR';
 export const USER_READ_SUCCESS = 'USER_READ_SUCCESS';
-
+export const USER_READ_UPDATE_SUCCESS = 'USER_READ_UPDATE_SUCCESS';
 
 
 function requestUsers() {
@@ -107,9 +107,20 @@ export const fetchUserBooks = (endpoint) => {
     try {
       users = await get(endpoint);
     } catch (e) {
-      return dispatch(userBooksError(e))
+      return dispatch(userBooksError(e));
     }
     
     dispatch(receiveUserBooks(users.result.items));
+  }
+}
+
+export const updateReadBooks = (bookId, rating) => {
+  return async (dispatch) => {
+    try{
+      await post('users/me/read', {bookId, rating});
+    }
+    catch(e){
+      return dispatch(userBooksError(e));
+    }
   }
 }

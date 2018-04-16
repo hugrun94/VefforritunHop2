@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchBook } from '../../actions/books';
 import { NavLink } from 'react-router-dom';
-
+import { updateReadBooks } from '../../actions/users';
 
 //import './Book.css';
 
@@ -57,7 +57,21 @@ class Book extends Component {
     return data;
   }*/
 
+  handleClickRead = async () => {
+    // Hér á að bætast við að notandi hafi lesið þessa bók
+    
+    const {readBooks, dispatch}  = this.props;
+    dispatch(updateReadBooks(bookId))
+    // actions -> readBooks.push()
+    // gera setstate
 
+    /*const offset = this.state.offset - 10;
+    const page = this.state.page - 1;
+    this.setState({ offset, page });
+    this.setState({ loading: true });
+    const { dispatch } = this.props;
+    dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));*/
+  }
 
   render() {
     const { book, loading, error } = this.props;
@@ -90,6 +104,12 @@ class Book extends Component {
           params={{book }}>
           Breyta bók
         </NavLink><br></br>
+ASDF 
+        <button className="book_button" onClick={this.handleClickRead}>
+          <NavLink to="/">
+          Lesin bók
+          </NavLink>
+        </button><br></br>
       
         <button className="book_button">
           <NavLink to="../books">
@@ -107,6 +127,7 @@ const mapStateToProps = (state) => {
     isFetching: state.books.isFetching,
     book: state.books.book,
     error: state.books.error,
+    readBooks: state.users.readBooks,
   }
 }
 
