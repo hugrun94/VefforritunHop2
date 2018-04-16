@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchBooks } from '../../actions/books';
+import { logoutUser } from '../../actions/auth';
 
 import { Link, NavLink, Redirect } from 'react-router-dom';
 
@@ -29,9 +30,16 @@ class Header extends Component {
     }
   }
 
+  handleLogout = (e) => {
+    const { dispatch } = this.props;
+    dispatch(logoutUser());
+  }
+
   render() {
 
     const { query } = this.state;
+
+    const { isAuthenticated } = this.props;
 
     console.log(query)
 
@@ -43,15 +51,17 @@ class Header extends Component {
         <form>
           <input id="search" type="text" name="query" onChange={this.handleInputChange} />
         </form>
-        <button className="search_button" onClick={this.onClick}>
+        <button className="button" onClick={this.onClick}>
           <NavLink exact
-            to={`/books?search=${this.state.query}`}>
+            to={`/books?search=${this.state.query}`} className="search">
             Leita
           </NavLink>
         </button>
         
-
-        <Link to="/login">Innskráning</Link>
+        {isAuthenticated &&
+        <button className="button" onClick={this.handleLogout}>Útskrá</button>}
+        {!isAuthenticated &&
+        <Link to="/login">Innskráning</Link> }
       </header>
     );
   }
@@ -60,6 +70,7 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    isAuthenticated: state.auth.isAuthenticated,
   }
 }
 

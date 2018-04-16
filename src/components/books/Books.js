@@ -59,21 +59,33 @@ class Books extends Component {
 
 
   handleClick = async () => {
-    const offset = this.state.offset + 10;
+    let offset = this.state.offset + 10;
     const page = this.state.page + 1;
     this.setState({ offset, page });
     this.setState({ loading: true });
     const { dispatch } = this.props;
+    offset = this.state.offset;
+    console.log(offset)
     dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
   }
 
   handleClickPrevious = async () => {
-    const offset = this.state.offset - 10;
-    const page = this.state.page - 1;
+    let offset = this.state.offset - 10;
+    let page = this.state.page - 1;
     this.setState({ offset, page });
     this.setState({ loading: true });
     const { dispatch } = this.props;
-    dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
+    offset = this.state.offset;
+    page = this.state.page;
+
+    console.log(offset, page)
+
+    if (this.state.page === 1) {
+      dispatch(fetchBooks(`/books?offset=${this.state.offset}`));
+    }
+    else {
+      dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
+    }
   }
 
   render() {
@@ -104,16 +116,16 @@ class Books extends Component {
           ))}
         </ul>
         {this.state.page > 1 && 
-          <button className="previous" onClick={this.handleClickPrevious}>
+          <button className="button" onClick={this.handleClickPrevious}>
           <NavLink exact
-            to={`/books?offset=${10 + this.state.offset}`}>
+            to={`/books?offset=${this.state.offset - 10}`} className="pageLink">
             Fyrri síða
           </NavLink>
         </button>}
         <span>Síða {this.state.page} </span>
-        <button className="book_button" onClick={this.handleClick}>
+        <button className="button" onClick={this.handleClick}>
           <NavLink exact
-            to={`/books?offset=${10 + this.state.offset}`}>
+            to={`/books?offset=${this.state.offset + 10}`} className="pageLink">
             Næsta síða
           </NavLink>
         </button>

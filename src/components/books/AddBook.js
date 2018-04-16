@@ -29,7 +29,7 @@ class AddBook extends Component {
 
     if (name) {
       this.setState({ [name]: value });
-      dispatch(editBook([name]: value));
+      //dispatch(editBook({[name]: value}));
     }
 
     
@@ -52,17 +52,11 @@ class AddBook extends Component {
     console.log(token)
     //dispatch(recieveLogin(token));
     
-    const { isAuthenticated } = this.props;
-    console.log(isAuthenticated)
 
-    console.log(title, author, description, isbn10, isbn13, category, published, pagecount, language, categorytitle)
-
-    if (path === '/books/new') {
+    //if (path === '/books/new') {
       dispatch(addBook(title, author, description, isbn10, isbn13, 12, published, pagecount, language, categorytitle));
-    }
-    else {
-
-    }
+    //}
+    // asdf vantar else...
   }
 
   render() {

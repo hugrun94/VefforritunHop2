@@ -20,7 +20,7 @@ class Home extends Component {
     	return (
 	      <div>
 	        <h2>Velkomin á bókasafnið</h2>
-	        <h3>Til að njóta bókasafnisins til fullnustu mælum við með að <Link to="/login">skrá sig inn</Link> Þangað til getur þú skoðað allar bækurnar (Vantarlink)</h3>
+	        <p>Til að njóta bókasafnisins til fullnustu mælum við með að <Link to="/login">skrá sig inn</Link> Þangað til getur þú skoðað <Link to ="/books">allar bækurnar</Link>.</p>
 	      </div>
 	    );
     }

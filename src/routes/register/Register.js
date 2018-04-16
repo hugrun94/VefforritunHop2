@@ -74,15 +74,15 @@ state = {
             <label htmlFor="name">Fullt nafn:</label>
             <input id="name" type="text" name="name" value={name} onChange={this.handleInputChange} />
           </div>
-        <button className="user_button" onClick={this.handleSubmit}>
+        <button className="button" onClick={this.handleSubmit}>
           {!message && ( 
             <NavLink exact
-            to='/login'>
+            to='/login' className="register">
             Nýskrá
           </NavLink>)}
           {message && (
         <NavLink exact
-            to='/register'>
+            to='/register' className="register">
             Nýskrá
           </NavLink>)}
         </button>
