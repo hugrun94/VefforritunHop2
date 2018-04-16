@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from '../../actions/auth';
-import { Link , Redirect} from 'react-router-dom';
+import { Link , Redirect, NavLink} from 'react-router-dom';
 
 /* todo sækja actions frá ./actions */
 
@@ -69,7 +69,14 @@ state = {
             <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
           </div>
 
-          <button disabled={isFetching}>Innskrá</button>
+          <button disabled={isFetching}>
+          {isAuthenticated && (
+            <NavLink exact
+            to='/login'>
+            Innskrá
+            </NavLink>
+            )}
+            </button>
           <p><Link to='/register'>Nýskráning</Link></p>
         </form>
       </div>
