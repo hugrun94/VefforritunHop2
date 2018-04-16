@@ -57,6 +57,7 @@ class User extends Component {
 
   render() {
     const { user, readBooks, isFetching, error, books } = this.props;
+    // asdf gera þetta allt bara ef isAuthenticated er true!!
     let bookTitles = []
     for (let i = 0; i < readBooks.length; i++) {
       for (let j = 0; j < books.length; j++) {

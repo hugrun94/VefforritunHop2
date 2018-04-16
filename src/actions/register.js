@@ -66,22 +66,30 @@ export const addUser = (username,password,name) => {
   }
 }
 
-export const editUsername = (username) => {
+export const editUsername = (name) => {
   return async (dispatch) => {
     //dispatch(requestUser());
 
-    let user;
     try {
-      user = await patch('/users/me', {username});
-
-      console.log(user);
+      await patch('/users/me', {name});
 
        } catch (e) {
       return dispatch(userError(e))
     }
-    console.log(user.result);
 
-    return dispatch(receiveuser(user.result))
+  }
+}
+
+export const editPassword = (password) => {
+  return async (dispatch) => {
+    //dispatch(requestUser());
+
+    try {
+      await patch('/users/me', {name: null, password});
+
+       } catch (e) {
+      return dispatch(userError(e))
+    }
 
   }
 }
