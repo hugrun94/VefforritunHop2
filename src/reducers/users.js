@@ -6,6 +6,7 @@ import {
   USER_READ_REQUEST, 
   USER_READ_ERROR, 
   USER_READ_SUCCESS, 
+  USER_READ_UPDATE_SUCCESS,
 } from '../actions/users';
 
 
@@ -74,6 +75,13 @@ export default (state = initialState, action) => {
         error: action.error,
         isAuthenticated: action.isAuthenticated,
       };
+
+    case USER_READ_UPDATE_SUCCESS:
+      return {
+        ...state,
+        readBooks: action.readBooks,
+        isAuthenticated: action.isAuthenticated,
+      }
 
     default:
       return state;
