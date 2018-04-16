@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser, fetchUserBooks } from '../../actions/users';
 import { fetchBooks } from '../../actions/books';
+import { editUsername, editPassword } from '../../actions/register';
 import { NavLink } from 'react-router-dom';
 
 class Profile extends Component {
+
+  state = {
+    username: '',
+    password: '',
+    password2: '',
+  }
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,9 +30,51 @@ class Profile extends Component {
     dispatch(fetchBooks('/books'));
   }
 
+  handleSubmitName = async (e) => {
+    e.preventDefault();
+
+    const { dispatch } = this.props;
+    const { username } = this.state;
+
+    console.log(username)
+
+    //dispatch(recieveLogin(token));
+    
+    
+    const { isAuthenticated } = this.props;
+    console.log(isAuthenticated)
+
+    localStorage.setItem('user', username);
+
+    //if (isAuthenticated) {
+      dispatch(editUsername(username));
+    //}
+  }
+
+  handleSubmitPassword = async (e) => {
+    e.preventDefault();
+
+    const { dispatch } = this.props;
+    const { password, password2 } = this.state;
+
+    //dispatch(recieveLogin(token));
+    
+    const { isAuthenticated } = this.props;
+    console.log(isAuthenticated)
+
+    
+
+    if (password === password2) {
+      console.log('lykilorð uppfært')
+      dispatch(editPassword(password));
+    }
+  }
+
   render() {
 
     const { isAdding, user, errors, readBooks, books } = this.props;
+
+    const { username, password } = this.state;
 
     const userLoggedIn = window.localStorage.getItem('user');
     console.log(userLoggedIn)
@@ -54,18 +103,18 @@ class Profile extends Component {
           <input type="submit"/>
         </form>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmitName}>
 
           <div>
-            <label htmlFor="name">Nafn:</label>
-            <input id="name" type="text" name="name" onChange={this.handleInputChange} />
+            <label htmlFor="username">Nafn:</label>
+            <input id="username" type="text" name="username" value={username} onChange={this.handleInputChange} />
           </div>
 
           <button disabled={isAdding}>Uppfæra nafn</button>
 
         </form>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmitPassword}>
 
           <div>
             <label htmlFor="password">Lykilorð:</label>
