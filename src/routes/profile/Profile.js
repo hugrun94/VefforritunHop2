@@ -54,7 +54,7 @@ class Profile extends Component {
           <input type="submit"/>
         </form>
 
-        <form onSubmit="../profile">
+        <form onSubmit={this.handleSubmit}>
 
           <div>
             <label htmlFor="name">Nafn:</label>
