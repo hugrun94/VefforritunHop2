@@ -6,6 +6,19 @@ import { NavLink } from 'react-router-dom'
 
 class AddBook extends Component {
 
+  state = {
+    title: '',
+    author: '',
+    descr: '',
+    ISBN10: '',
+    ISBN13: '',
+    category: '',
+    published: '',
+    pagecount: '',
+    language: '',
+    categorytitle: '',
+  }
+
   handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -18,7 +31,7 @@ class AddBook extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle } = this.props;
+    const { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle } = this.state;
 
     let token = localStorage.getItem('user');
 
@@ -30,9 +43,9 @@ class AddBook extends Component {
 
     console.log(title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle)
 
-    if (isAuthenticated) {
-      dispatch(addBook(title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle));
-    }
+    //if (isAuthenticated) {
+      dispatch(addBook(title, author, descr, ISBN10, ISBN13, 12, published, pagecount, language, categorytitle));
+    //}
   }
 
   render() {
@@ -49,13 +62,13 @@ class AddBook extends Component {
 
     return (
       <div>
-        {/*errors && (
+        {errors && (
           <ul>{errors.map((error, i) => (
             <li key={i}>
               {error.message}
             </li>
           ))}</ul>
-        )*/}
+        )}
 
         <form onSubmit={this.handleSubmit}>
 

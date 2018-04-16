@@ -72,6 +72,7 @@ function receiveAddBook(book) {
 }
 
 export const fetchBooks = (endpoint) => {
+  console.log(endpoint)
   return async (dispatch) => {
     dispatch(requestBooks());
     let books;
@@ -104,16 +105,17 @@ export const fetchBook = (endpoint) => {
 export const addBook = (title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle) => {
   return async (dispatch) => {
     dispatch(addingBook());
-
+    console.log(title)
     let book;
     try {
       book = await post('/books', { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle });
+      console.log(book.result)
     } catch (e) {
       return dispatch(addBooksError([{ message: e }]))
     }
 
     if (book.status >= 400) {
-      return dispatch(addBooksError(book.result))
+      return dispatch(addBooksError(book.result.errors))
     }
 
     dispatch(receiveAddBook(book.result))

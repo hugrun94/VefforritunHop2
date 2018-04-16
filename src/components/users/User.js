@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {fetchUser } from '../../actions/users';
+import { fetchUser, fetchUserBooks } from '../../actions/users';
+import { fetchBooks } from '../../actions/books';
+
 import { NavLink } from 'react-router-dom';
 
 /** 
@@ -20,11 +22,10 @@ import { NavLink } from 'react-router-dom';
 
 const url = process.env.REACT_APP_SERVICE_URL;
 
-export default class User extends Component {
+class User extends Component {
   static propTypes = {
     name: PropTypes.string,
     
-    // asdf hvað er match og params?
     match: PropTypes.shape({
       params: PropTypes.shape({
         user: PropTypes.string,
@@ -44,54 +45,62 @@ export default class User extends Component {
         } = {},
       } = {},
     } = this.props;
+
     const { dispatch } = this.props;
-    dispatch(fetchUser(`/users/${user}`))
-    console.log("notandi: ", user)
-    /*try {
-      const userData = await this.fetcUser();
-      this.setState({ userData, loading: false });
-    } catch (error) {
-      console.error('Error fetching user', error);
-      this.setState({ error: true, loading: false });
-    }*/
+    dispatch(fetchUser(`/users/${user}`));
+    dispatch(fetchUserBooks(`/users/${user}/read`));
+    dispatch(fetchBooks('/books'));
   }
 
 
-  /*fetchUser = async () => {
-    const {
-      match: {
-        params: {
-          user = '',
-        } = {},
-      } = {},
-    } = this.props;
-    const response = await fetch(`${url}/users/${user}`);
-    const data = await response.json();
-    return data;
-  }
-*/
+
+
   render() {
-    const { user, loading, error } = this.props;
+    const { user, readBooks, isFetching, error, books } = this.props;
+    let bookTitles = []
+    for (let i = 0; i < readBooks.length; i++) {
+      for (let j = 0; j < books.length; j++) {
+        if (readBooks[i].book_id === books[j].id) {
+          bookTitles.push({ 
+            book_id: books[j].id, 
+            book_title: books[j].title,
+            rating: readBooks[i].rating,
+            review: readBooks[i].review, 
+          });
+          break;
+        }
+      }
+    }
 
-    if (loading) {
-      return (<div>Sæki notanda...</div>);
+    console.log(readBooks)
+
+    if (isFetching) {
+      return (<div>Sæki notanda</div>);
     }
 
     if (error) {
       return (<div>Villa við að sækja notanda</div>);
     }
 
-    const { name } = this.props;
-// ASDF sækja lesnar bækur úr lista yfir lesnar bækur
+
     return (
       <section className="user">
-        <li className="user">
-          <h3 className="user__header">{user.name}</h3>
-          <br><h3>Lesnar bækur</h3></br>
-          <p>{}</p>}
-          <p>Einkunn: {user.rating}</p>
-          <p>{user.description}</p>
-        </li>
+      <h3 className="user__header">{user.name}</h3>
+      <h3 className="read__books">Lesnar bækur</h3>
+        <ul>
+          {bookTitles.map((book) => (
+            <div>
+              <h3 key={book.book_id}>
+                <NavLink exact
+                    to={`/books/${book.book_id}`}>
+                    {book.book_title}
+                </NavLink>
+              </h3>
+              <p>Einkunn: {book.rating}. {book.review}</p>
+            </div>
+          ))}
+        </ul>
+
 
         <button className="user_button">
           <NavLink to="../users">
@@ -102,3 +111,15 @@ export default class User extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.users.isFetching,
+    user: state.users.user,
+    error: state.users.error,
+    readBooks: state.users.readBooks,
+    books: state.books.books,
+  }
+}
+
+export default connect(mapStateToProps)(User);

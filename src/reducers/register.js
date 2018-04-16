@@ -1,4 +1,4 @@
-import { NEWUSER_REQUEST, NEWUSER_SUCCESS, NEWUSER_FAILURE } from './../actions/register';
+import { NEWUSER_REQUEST, NEWUSER_SUCCESS, NEWUSER_FAILURE, EDIT_USERNAME } from './../actions/register';
 const user = JSON.parse(localStorage.getItem('user') || 'null');
 
 const initialState = {
@@ -34,6 +34,15 @@ export default (state = initialState, action) => {
         isFetching: action.isFetching,
         isAuthenticated: action.isAuthenticated,
         message: action.message
+      };
+
+    case EDIT_USERNAME:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        isAuthenticated: action.isAuthenticated,
+        user: action.user,
+        message: action.message,
       };
 
     default:

@@ -1,4 +1,13 @@
-import { USERS_REQUEST, USERS_ERROR, USERS_SUCCESS, USER_SUCCESS } from '../actions/users';
+import { 
+  USERS_REQUEST, 
+  USERS_ERROR, 
+  USERS_SUCCESS, 
+  USER_SUCCESS, 
+  USER_READ_REQUEST, 
+  USER_READ_ERROR, 
+  USER_READ_SUCCESS, 
+} from '../actions/users';
+
 
 const initialState = {
   isFetching: false,
@@ -7,6 +16,7 @@ const initialState = {
   error: null,
   errors: [],
   isAuthenticated: false,
+  readBooks: [],
 };
 
 export default (state = initialState, action) => {
@@ -34,12 +44,35 @@ export default (state = initialState, action) => {
         isAuthenticated: action.isAuthenticated,
       };
 
-      case USER_SUCCESS:
+    case USER_SUCCESS:
+    return {
+      ...state,
+      isFetching: action.isFetching,
+      user: action.user,
+      error: action.error,
+    };
+
+    case USER_READ_REQUEST:
       return {
         ...state,
         isFetching: action.isFetching,
-        user: action.user,
+      };
+
+    case USER_READ_ERROR:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        readBooks: action.readBooks,
         error: action.error,
+      };
+
+    case USER_READ_SUCCESS:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        readBooks: action.readBooks,
+        error: action.error,
+        isAuthenticated: action.isAuthenticated,
       };
 
     default:

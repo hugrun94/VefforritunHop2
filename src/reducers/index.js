@@ -3,6 +3,7 @@ import auth from './auth'
 import books from './books'
 import register from './register'
 import users from './users'
+import search from './search'
 import user from './user'
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   books,
   register,
   users,
+  search,
   user,
 })
