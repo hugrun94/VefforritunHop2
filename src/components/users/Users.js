@@ -24,21 +24,24 @@ class Users extends Component {
     }
 
     handleClick = async () => {
-      const offset = this.state.offset + 10;
+      let offset = this.state.offset + 10;
       const page = this.state.page + 1;
       this.setState({ offset, page });
       this.setState({ loading: true });
       const { dispatch } = this.props;
-      dispatch(fetchUsers(`/users?offset=${10 + this.state.offset}`));
+      offset = this.state.offset;
+      dispatch(fetchUsers(`/users?offset=${this.state.offset+10}`));
     }
   
     handleClickPrevious = async () => {
-      const offset = this.state.offset - 10;
-      const page = this.state.page - 1;
+      let offset = this.state.offset - 10;
+      let page = this.state.page - 1;
       this.setState({ offset, page });
       this.setState({ loading: true });
       const { dispatch } = this.props;
-      dispatch(fetchUsers(`/users?offset=${10 + this.state.offset}`));
+      offset = this.state.offset;
+      page = this.state.page;
+      dispatch(fetchUsers(`/users?offset=${this.state.offset-10}`));
     }
 
 
@@ -77,14 +80,14 @@ class Users extends Component {
             {this.state.page > 1 && 
               <button className="previous" onClick={this.handleClickPrevious}>
               <NavLink exact
-                to={`/users?offset=${10 + this.state.offset}`}>
+                to={`/users?offset=${this.state.offset-10}`}>
                 Fyrri síða
               </NavLink>
             </button>}
             <span>Síða {this.state.page} </span>
             <button className="book_button" onClick={this.handleClick}>
               <NavLink exact
-                to={`/users?offset=${10 + this.state.offset}`}>
+                to={`/users?offset=${this.state.offset+10}`}>
                 Næsta síða
               </NavLink>
             </button>

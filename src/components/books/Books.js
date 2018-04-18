@@ -66,7 +66,7 @@ class Books extends Component {
     const { dispatch } = this.props;
     offset = this.state.offset;
     console.log(offset)
-    dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
+    dispatch(fetchBooks(`/books?offset=${this.state.offset+10}`));
   }
 
   handleClickPrevious = async () => {
@@ -84,7 +84,7 @@ class Books extends Component {
       dispatch(fetchBooks(`/books?offset=${this.state.offset}`));
     }
     else {
-      dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
+      dispatch(fetchBooks(`/books?offset=${this.state.offset-10}`));
     }
   }
 
@@ -118,14 +118,14 @@ class Books extends Component {
         {this.state.page > 1 && 
           <button className="button" onClick={this.handleClickPrevious}>
           <NavLink exact
-            to={`/books?offset=${this.state.offset - 10}`} className="pageLink">
+            to={`/books?offset=${this.state.offset-10}`} className="pageLink">
             Fyrri síða
           </NavLink>
         </button>}
         <span>Síða {this.state.page} </span>
         <button className="button" onClick={this.handleClick}>
           <NavLink exact
-            to={`/books?offset=${this.state.offset + 10}`} className="pageLink">
+            to={`/books?offset=${this.state.offset+10}`} className="pageLink">
             Næsta síða
           </NavLink>
         </button>
