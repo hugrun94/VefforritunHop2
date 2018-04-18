@@ -22,6 +22,7 @@ class Book extends Component {
 
   state = {
     loading: true,
+    isRating: false,
   }
 
   async componentDidMount() {
@@ -34,33 +35,16 @@ class Book extends Component {
     } = this.props;
     const { dispatch } = this.props;
     dispatch(fetchBook(`/books/${book}`));
-    /*try {
-      const book = await this.fetchBook();
-      this.setState({ book, loading: false });
-    } catch (error) {
-      console.error('Error fetching book', error);
-      this.setState({ error: true, loading: false });
-    }*/
   }
 
-
-  /*fetchBook = async () => {
-    const {
-      match: {
-        params: {
-          book = '',
-        } = {},
-      } = {},
-    } = this.props;
-    const response = await fetch(`${url}/books/${book}`);
-    const data = await response.json();
-    return data;
-  }*/
 
   handleClickRead = async () => {
     // Hér á að bætast við að notandi hafi lesið þessa bók
     
     const {readBooks, dispatch}  = this.props;
+    let { isRating } = this.state;
+    isRating = true;
+    this.setState({ isRating });
     dispatch(updateReadBooks())
     // actions -> readBooks.push()
     // gera setstate
@@ -75,6 +59,8 @@ class Book extends Component {
 
   render() {
     const { book, loading, error } = this.props;
+
+    const { isRating } = this.state;
 
     if (loading) {
       return (<div>Sæki bók</div>);
@@ -104,12 +90,14 @@ class Book extends Component {
           params={{book }}>
           Breyta bók
         </NavLink><br></br>
-ASDF 
-        <button className="book_button" onClick={this.handleClickRead}>
-          <NavLink to="/">
+ 
+        {!isRating && (<button className="book_button" onClick={this.handleClickRead}>
           Lesin bók
-          </NavLink>
-        </button><br></br>
+        </button>)}
+        
+        
+
+        <br></br>
       
         <button className="book_button">
           <NavLink to="../books">
@@ -127,6 +115,7 @@ const mapStateToProps = (state) => {
     isFetching: state.books.isFetching,
     book: state.books.book,
     error: state.books.error,
+    isAuthenticated: state.users.isAuthenticated,
     readBooks: state.users.readBooks,
   }
 }
