@@ -61,7 +61,7 @@ class Book extends Component {
     // Hér á að bætast við að notandi hafi lesið þessa bók
     
     const {readBooks, dispatch}  = this.props;
-    dispatch(updateReadBooks(bookId))
+    dispatch(updateReadBooks())
     // actions -> readBooks.push()
     // gera setstate
 

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from '../../actions/auth';
-import { Link , Redirect, NavLink} from 'react-router-dom';
+import { Link , Redirect, NavLink, Route } from 'react-router-dom';
 
 /* todo sækja actions frá ./actions */
 
 import './Login.css';
+import Home from '../home';
+import Books from '../../components/books/Books';
 
 class Login extends Component {
 state = {
@@ -24,7 +26,7 @@ state = {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { dispatch } = this.props;
+    const { dispatch, isAuthenticated } = this.props;
     const { username, password } = this.state;
 
     dispatch(loginUser(username, password));
@@ -41,7 +43,12 @@ state = {
 
     if (isAuthenticated) {
       return (
-        <button onClick={this.handleLogout}>Útskrá</button>
+        <div>
+        <Route exact path="/login" render={() => (
+            <Redirect to="/"/>
+        )}/>
+        
+        </div>
       );
     }
 
@@ -69,16 +76,13 @@ state = {
             <input id="password" type="password" name="password" value={password} onChange={this.handleInputChange} />
           </div>
 
-          <button disabled={isFetching}>
-          {isAuthenticated && (
-            <NavLink exact
-            to='/login'>
+          <button className="button" disabled={isFetching}>
             Innskrá
-            </NavLink>
-            )}
-            </button>
-          <p><Link to='/register'>Nýskráning</Link></p>
+          </button>
+          
         </form>
+
+        <p><Link to='/register'>Nýskráning</Link></p>
       </div>
     );
   }

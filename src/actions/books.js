@@ -1,4 +1,4 @@
-import { get, post } from '../api';
+import { get, post, patch } from '../api';
 
 export const BOOKS_REQUEST = 'BOOKS_REQUEST';
 export const BOOKS_ERROR = 'BOOKS_ERROR';
@@ -45,6 +45,9 @@ function receiveBook(book) {
 export const BOOKS_ADD_REQUEST = 'BOOKS_ADD_REQUEST';
 export const BOOKS_ADD_ERROR = 'BOOKS_ADD_ERROR';
 export const BOOKS_ADD_SUCCESS = 'BOOKS_ADD_SUCCESS';
+export const BOOKS_EDIT_REQUEST = 'BOOKS_EDIT_REQUEST';
+export const BOOKS_EDIT_ERROR = 'BOOKS_EDIT_ERROR';
+export const BOOKS_EDIT_SUCCESS = 'BOOKS_EDIT_SUCCESS';
 
 function addingBook(book) {
   return {
@@ -70,6 +73,32 @@ function receiveAddBook(book) {
     errors: null,
   }
 }
+
+function editingBook(book) {
+  return {
+    type: BOOKS_EDIT_REQUEST,
+    isAdding: false,
+    errors: null,
+  }
+}
+
+function editBooksError(errors) {
+  return {
+    type: BOOKS_EDIT_ERROR,
+    isAdding: false,
+    errors,
+  }
+}
+
+function receiveEditBook(book) {
+  return {
+    type: BOOKS_EDIT_SUCCESS,
+    isAdding: false,
+    book,
+    errors: null,
+  }
+}
+
 
 export const fetchBooks = (endpoint) => {
   console.log(endpoint)
@@ -119,5 +148,25 @@ export const addBook = (title, author, descr, ISBN10, ISBN13, category, publishe
     }
 
     dispatch(receiveAddBook(book.result))
+  }
+}
+
+export const editBook = (id, title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle) => {
+  return async (dispatch) => {
+    dispatch(editingBook());
+    console.log(title)
+    let book;
+    try {
+      book = await patch(`/books/${id}`, { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle });
+      console.log(book.result)
+    } catch (e) {
+      return dispatch(editBooksError([{ message: e }]))
+    }
+
+    if (book.status >= 400) {
+      return dispatch(editBooksError(book.result.errors))
+    }
+
+    dispatch(receiveEditBook(book.result))
   }
 }
