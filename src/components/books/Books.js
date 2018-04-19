@@ -4,6 +4,7 @@ import { fetchBooks } from '../../actions/books';
 import { NavLink } from 'react-router-dom';
 
 import Book from './Book';
+import './Books.css';
 
 const queryString = require('query-string');
 
@@ -99,7 +100,7 @@ class Books extends Component {
     
 
     return (
-      <section>
+      <section className="wrapper">
         <h2>Bækur</h2>
         <ul>
           {books.map((book) => (
