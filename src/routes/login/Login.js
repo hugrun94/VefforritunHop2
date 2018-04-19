@@ -62,14 +62,12 @@ state = {
       );
     }
 
+    console.log(message)
+
     return (
       <div className="wrapper">
         {message && (
-          <ul>{message.map((error, i) => (
-            <li key={i}>
-              {message.message}
-            </li>
-          ))}</ul>
+          <p>{message}</p>
         )}
 
         <form onSubmit={this.handleSubmit}>
