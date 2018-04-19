@@ -78,17 +78,17 @@ class Users extends Component {
             </ul>
 
             {this.state.page > 1 && 
-              <button className="previous" onClick={this.handleClickPrevious}>
-              <NavLink exact
+              <button className="button" onClick={this.handleClickPrevious}>
+              <NavLink exact className="link_white"
                 to={`/users?offset=${this.state.offset-10}`}>
-                Fyrri síða
+                  Fyrri síða
               </NavLink>
             </button>}
             <span>Síða {this.state.page} </span>
-            <button className="book_button" onClick={this.handleClick}>
-              <NavLink exact
+            <button className="button" onClick={this.handleClick}>
+              <NavLink exact className="link_white"
                 to={`/users?offset=${this.state.offset+10}`}>
-                Næsta síða
+                  Næsta síða >
               </NavLink>
             </button>
           </section>

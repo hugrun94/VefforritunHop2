@@ -103,9 +103,9 @@ class User extends Component {
         </ul>
 
 
-        <button className="user_button">
-          <NavLink to="../users">
-          Til baka í notendur
+        <button className="button">
+        <NavLink className="link_white" to="../users">
+            Til baka í notendur
           </NavLink>
         </button>
       </section>

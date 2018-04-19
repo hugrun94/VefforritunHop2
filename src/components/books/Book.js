@@ -5,7 +5,7 @@ import { fetchBook } from '../../actions/books';
 import { NavLink } from 'react-router-dom';
 import { updateReadBooks } from '../../actions/users';
 
-//import './Book.css';
+import './Books.css';
 
 //const url = process.env.REACT_APP_SERVICE_URL;
 
@@ -91,7 +91,7 @@ class Book extends Component {
           Breyta bók
         </NavLink><br></br>
  
-        {!isRating && (<button className="book_button" onClick={this.handleClickRead}>
+        {!isRating && (<button className="button" onClick={this.handleClickRead}>
           Lesin bók
         </button>)}
         
@@ -99,9 +99,9 @@ class Book extends Component {
 
         <br></br>
       
-        <button className="book_button">
-          <NavLink to="../books">
-          Til baka
+        <button className="button">
+          <NavLink className="link_white" to="../books">
+            Til baka
           </NavLink>
         </button>
       </section>
