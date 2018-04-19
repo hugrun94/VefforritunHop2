@@ -40,6 +40,10 @@ class Header extends Component {
     const { query } = this.state;
 
     const { isAuthenticated } = this.props;
+    const user = window.localStorage.getItem('user');
+    console.log(JSON.parse(user));
+    const parsedUser = JSON.parse(user);
+
 
     console.log(query)
 
@@ -52,14 +56,25 @@ class Header extends Component {
           <input id="search" type="text" name="query" onChange={this.handleInputChange} />
         </form>
         <button className="button" onClick={this.onClick}>
-          <NavLink exact
+          <NavLink exact className="link_white"
             to={`/books?search=${this.state.query}`} className="search">
             Leita
           </NavLink>
         </button>
         
         {isAuthenticated &&
-        <button className="button" onClick={this.handleLogout}>Útskrá</button>}
+          <div>
+            <NavLink exact
+            to= '/profile'>
+            {parsedUser.name}
+          </NavLink>
+          <NavLink exact
+            to= '/profile'>
+            {parsedUser.image}
+          </NavLink>
+        <button className="button" onClick={this.handleLogout}>Útskrá</button>
+        </div>
+      }
         {!isAuthenticated &&
         <Link to="/login">Innskráning</Link> }
       </header>

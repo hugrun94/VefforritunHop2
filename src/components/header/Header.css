@@ -6,7 +6,7 @@
 	justify-content:space-between;
 	height: 80px;
 }
-
+/*
 .button {
 	padding: 10px 20px;
 	border: 0;
@@ -14,10 +14,16 @@
 	color: #fff;
 	background-color: #4e1d04;
 	font-size: 1rem;
-  }
+	}*/
+	
+	.link_white {
+		color: #FFF;
+		text-decoration: none;
+	}
 
   .search {
 	color: #fff;
+	text-decoration: none;
   }
 
 

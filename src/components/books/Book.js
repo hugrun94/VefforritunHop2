@@ -5,7 +5,7 @@ import { fetchBook } from '../../actions/books';
 import { NavLink, Route, Redirect } from 'react-router-dom';
 import { updateReadBooks } from '../../actions/users';
 
-//import './Book.css';
+import './Books.css';
 
 //const url = process.env.REACT_APP_SERVICE_URL;
 
@@ -112,7 +112,7 @@ class Book extends Component {
         </NavLink><br></br>
  
         {!isRating && !markReadDone && (
-        <button className="book_button" onClick={this.handleClickRead}>
+        <button className="button" onClick={this.handleClickRead}>
           Lesin bók
         </button>
         )}
@@ -154,9 +154,9 @@ class Book extends Component {
         )}
         
       
-        <button className="book_button">
-          <NavLink to="../books">
-          Til baka
+        <button className="button">
+          <NavLink className="link_white" to="../books">
+            Til baka
           </NavLink>
         </button>
       </section>

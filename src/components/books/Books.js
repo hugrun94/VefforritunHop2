@@ -95,9 +95,9 @@ class Books extends Component {
         </button>}
         <span>Síða {this.state.page} </span>
         <button className="button" onClick={this.handleClick}>
-          <NavLink exact
+          <NavLink exact className="link_white"
             to={`/books?offset=${this.state.offset+10}`} className="pageLink">
-            Næsta síða
+              Næsta síða >
           </NavLink>
         </button>
       </section>

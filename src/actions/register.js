@@ -16,7 +16,6 @@ function requestUser() {
   }
 }
   function receiveuser(user) {
-  	console.log("hugrun")
   return {
     type: NEWUSER_SUCCESS,
     isFetching: false,

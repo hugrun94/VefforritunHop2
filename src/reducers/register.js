@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log("rafnar")
   switch (action.type) {
 
     /* todo setja upp reducer */
