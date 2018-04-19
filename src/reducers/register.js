@@ -28,6 +28,7 @@ export default (state = initialState, action) => {
         message: action.message,
       };
     case NEWUSER_FAILURE:
+    console.log(action)
       return {
         ...state,
         isFetching: action.isFetching,
