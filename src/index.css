@@ -38,6 +38,8 @@ p {
 
 @media only screen and (max-width: 500px) {
   .header {
+    width: 500px;
+    height: 200px;
     display: block;
     float: left;
     flex-direction:column;
@@ -47,4 +49,19 @@ p {
 .wrapper {
   margin-top: 25px;
   margin-left: 100px;
+  list-style-type: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .wrapper {
+    margin-top: 300px;
+    margin-left: 0px;
+    float: left;
+    display: block;
+    flex-direction:column;
+  }
+}
+
+.li_nobullet {
+  list-style-type: none;
 }

@@ -61,7 +61,7 @@ state = {
     }
 
     return (
-      <div>
+      <div className="wrapper">
         {message && (
           <ul>{message.map((error, i) => (
             <li key={i}>

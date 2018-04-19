@@ -64,16 +64,18 @@ class Users extends Component {
         console.log("page: ", this.state.page)
         console.log("users: ", users) // asdf fjarlægja
         return (
-          <section>
-            <h2>Notendur</h2>
+          <section className="wrapper">
+            <h2>Notendur</h2><br></br>
             <ul>
               {users.map((user) => (
-                <li key={user.id}>
-                  <NavLink exact
-                    to={`/users/${user.id}`}>
-                    {user.name}
-                  </NavLink>
-                </li>
+                <h3>
+                  <li className="li_nobullet" key={user.id}>
+                    <NavLink exact
+                      to={`/users/${user.id}`}>
+                      {user.name}
+                    </NavLink><br></br><br></br>
+                  </li>
+                </h3>
               ))}
             </ul>
 
