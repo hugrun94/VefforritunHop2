@@ -116,9 +116,42 @@ export async function patch(endpoint, data) {
   return { result, status: response.status };
 }
 
+export async function deleteh(endpoint, data) {
+  const url = `${baseurl}${endpoint}`;
+  console.log(data);
+  console.log(url);
+
+
+  const token = window.localStorage.getItem('token');
+
+  const options = {
+    body: JSON.stringify(data),
+    headers: {
+      'content-type': 'application/json',
+    },
+    method: 'DELETE',
+  };
+
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+    console.log('token halló:', token)
+  }
+
+  console.log(options)
+
+
+  const response = await fetch(url, options);
+  const result = await response.json();
+  //console.log(response);
+  //console.log(result);
+
+  return { result, status: response.status };
+}
+
 export default {
   get,
   login,
   post,
   patch,
+  deleteh,
 };

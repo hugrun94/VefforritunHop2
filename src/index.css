@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  max-width: 100%;
 }
 
 html {
@@ -17,6 +18,7 @@ body {
 
   font-size: 16px;
   font-family: 'Open sans', sans-serif;
+  text-align: left;
 }
 
 h1,
@@ -32,4 +34,34 @@ a {
 
 p {
   margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .header {
+    width: 500px;
+    height: 200px;
+    display: block;
+    float: left;
+    flex-direction:column;
+  }
+}
+
+.wrapper {
+  margin-top: 25px;
+  margin-left: 100px;
+  list-style-type: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .wrapper {
+    margin-top: 300px;
+    margin-left: 0px;
+    float: left;
+    display: block;
+    flex-direction:column;
+  }
+}
+
+.li_nobullet {
+  list-style-type: none;
 }

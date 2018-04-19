@@ -1,4 +1,4 @@
-import { get, post } from '../api';
+import { get, post, deleteh } from '../api';
 
 export const USERS_REQUEST = 'USERS_REQUEST';
 export const USERS_ERROR = 'USERS_ERROR';
@@ -114,12 +114,23 @@ export const fetchUserBooks = (endpoint) => {
   }
 }
 
-export const updateReadBooks = (bookId, rating) => {
+export const updateReadBooks = (bookId, review, rating) => {
   return async (dispatch) => {
     try{
-      await post('users/me/read', {bookId, rating});
+      await post('/users/me/read', {bookId, review, rating});
     }
     catch(e){
+      return dispatch(userBooksError(e));
+    }
+  }
+}
+
+export const deleteReadBooks = (bookId) => {
+  return async (dispatch) => {
+    try {
+      await deleteh(`/users/me/read/${bookId}`, {bookId});
+    }
+    catch(e) {
       return dispatch(userBooksError(e));
     }
   }

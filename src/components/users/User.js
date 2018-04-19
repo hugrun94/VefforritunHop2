@@ -85,27 +85,31 @@ class User extends Component {
 
 
     return (
-      <section className="user">
-      <h3 className="user__header">{user.name}</h3>
-      <h3 className="read__books">Lesnar bækur</h3>
+      <section className="wrapper">
+      <h2 className="user__header">{user.name}</h2><br></br>
+      <h2 className="read__books">Lesnar bækur</h2><br></br>
         <ul>
+          <li>
           {bookTitles.map((book) => (
-            <div>
+            <div >
               <h3 key={book.book_id}>
                 <NavLink exact
                     to={`/books/${book.book_id}`}>
                     {book.book_title}
                 </NavLink>
               </h3>
-              <p>Einkunn: {book.rating}. {book.review}</p>
+              <p>Einkunn: {book.rating}</p>
+              <br></br>
+              <p>Um bókina: {book.review}</p>
             </div>
           ))}
+          </li>
         </ul>
 
 
-        <button className="user_button">
-          <NavLink to="../users">
-          Til baka í notendur
+        <button className="button">
+        <NavLink className="link_white" to="../users">
+            Til baka í notendur
           </NavLink>
         </button>
       </section>

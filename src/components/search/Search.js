@@ -101,7 +101,7 @@ class Search extends Component {
               {book.published && (<span>, gefin út {book.published}</span>)}
             </div>
           ))}
-        </ul>
+        </ul><br></br><br></br>
         {this.state.page > 1 && 
           <button className="previous" onClick={this.handleClickPrevious}>
           <NavLink exact
@@ -110,10 +110,10 @@ class Search extends Component {
           </NavLink>
         </button>}
         <span>Síða {this.state.page} </span>
-        <button className="book_button" onClick={this.handleClick}>
-          <NavLink exact
+        <button className="button" onClick={this.handleClick}>
+          <NavLink exact className="link_white"
             to={`/books?offset=${10 + this.state.offset}`}>
-            Næsta síða
+              Næsta síða >
           </NavLink>
         </button>
       </section>

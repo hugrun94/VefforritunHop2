@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../../actions/users';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Route, Redirect } from 'react-router-dom'
 
 import User from './User';
 
@@ -18,9 +18,9 @@ class Users extends Component {
       
       const { dispatch, isAuthenticated } = this.props;
 
-      //if (isAuthenticated) {
+      if (isAuthenticated) {
         dispatch(fetchUsers('/users'));
-      //}
+      }
     }
 
     handleClick = async () => {
@@ -64,36 +64,39 @@ class Users extends Component {
         console.log("page: ", this.state.page)
         console.log("users: ", users) // asdf fjarlægja
         return (
-          <section>
-            <h2>Notendur</h2>
+          <section className="wrapper">
+            <h2>Notendur</h2><br></br>
             <ul>
               {users.map((user) => (
-                <li key={user.id}>
-                  <NavLink exact
-                    to={`/users/${user.id}`}>
-                    {user.name}
-                  </NavLink>
-                </li>
+                <h3>
+                  <li className="li_nobullet" key={user.id}>
+                    <NavLink exact
+                      to={`/users/${user.id}`}>
+                      {user.name}
+                    </NavLink><br></br><br></br>
+                  </li>
+                </h3>
               ))}
             </ul>
 
             {this.state.page > 1 && 
-              <button className="previous" onClick={this.handleClickPrevious}>
-              <NavLink exact
+              <button className="button" onClick={this.handleClickPrevious}>
+              <NavLink exact className="link_white"
                 to={`/users?offset=${this.state.offset-10}`}>
-                Fyrri síða
+                  Fyrri síða
               </NavLink>
             </button>}
             <span>Síða {this.state.page} </span>
-            <button className="book_button" onClick={this.handleClick}>
-              <NavLink exact
+            <button className="button" onClick={this.handleClick}>
+              <NavLink exact className="link_white"
                 to={`/users?offset=${this.state.offset+10}`}>
-                Næsta síða
+                  Næsta síða >
               </NavLink>
             </button>
           </section>
         );
       }
+    
 }
 
 const mapStateToProps = (state) => {

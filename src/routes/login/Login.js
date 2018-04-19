@@ -39,7 +39,10 @@ state = {
 
   render() {
     const { username, password } = this.state;
-    const { isFetching, isAuthenticated, message } = this.props;
+    const { dispatch, isFetching, isAuthenticated, message } = this.props;
+    console.log(message);
+
+
 
     if (isAuthenticated) {
       return (
@@ -52,6 +55,7 @@ state = {
       );
     }
 
+
     if (isFetching) {
       return (
         <p>Skrái inn <em>{username}</em>...</p>
@@ -59,9 +63,13 @@ state = {
     }
 
     return (
-      <div>
+      <div className="wrapper">
         {message && (
-          <p>{message}</p>
+          <ul>{message.map((error, i) => (
+            <li key={i}>
+              {message.message}
+            </li>
+          ))}</ul>
         )}
 
         <form onSubmit={this.handleSubmit}>

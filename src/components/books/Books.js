@@ -4,21 +4,11 @@ import { fetchBooks } from '../../actions/books';
 import { NavLink } from 'react-router-dom';
 
 import Book from './Book';
+import './Books.css';
 
 const queryString = require('query-string');
 
 class Books extends Component {
-
-  /*state = {
-    visibleNote: null,
-  }
-
-  onHeaderClick = (noteId) => {
-    return (e) => {
-      const visibleNote = this.state.visibleNote === noteId ? null : noteId;
-      this.setState({ visibleNote });
-    }
-  }*/
 
   state = { 
     page: 1,
@@ -38,24 +28,6 @@ class Books extends Component {
       dispatch(fetchBooks(`/books?offset=${this.state.offset}`));
     }
   }
-
-  /*async componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params !== prevProps.match.params) {
-      this.setState({ loading: true });
-
-    //const { dispatch } = this.props;
-    //dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
-
-      try {
-        const books = await this.fetchBooks(`/books?offset=${10 + this.state.offset}`);
-        this.setState({ books, loading: false });
-      } catch (error) {
-        console.error('Error fetching book', error);
-        this.setState({ error: true, loading: false });
-      }
-    }
-  }*/
-
 
 
   handleClick = async () => {
@@ -99,8 +71,8 @@ class Books extends Component {
     
 
     return (
-      <section>
-        <h2>Bækur</h2>
+      <section className="wrapper">
+        <h2>Bækur</h2><br></br>
         <ul>
           {books.map((book) => (
             <div>
@@ -124,9 +96,9 @@ class Books extends Component {
         </button>}
         <span>Síða {this.state.page} </span>
         <button className="button" onClick={this.handleClick}>
-          <NavLink exact
+          <NavLink exact className="link_white"
             to={`/books?offset=${this.state.offset+10}`} className="pageLink">
-            Næsta síða
+              Næsta síða >
           </NavLink>
         </button>
       </section>
