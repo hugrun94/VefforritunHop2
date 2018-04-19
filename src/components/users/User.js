@@ -103,7 +103,7 @@ class User extends Component {
         </ul>
 
 
-        <button className="user_button">
+        <button className="button">
           <NavLink to="../users">
           Til baka í notendur
           </NavLink>

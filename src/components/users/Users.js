@@ -85,7 +85,7 @@ class Users extends Component {
               </NavLink>
             </button>}
             <span>Síða {this.state.page} </span>
-            <button className="book_button" onClick={this.handleClick}>
+            <button className="button" onClick={this.handleClick}>
               <NavLink exact
                 to={`/users?offset=${this.state.offset+10}`}>
                 Næsta síða
