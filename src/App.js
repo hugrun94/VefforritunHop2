@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Route, NavLink, Link, Switch, withRouter } from 'react-router-dom'
+import { loginUser, logoutUser } from './actions/auth';
+
+
+
 
 import UserRoute from './components/user-route';
 import Header from './components/header';
@@ -24,8 +28,8 @@ import './App.css';
 class App extends Component {
 
   render() {
-    const { isAuthenticated } = this.props; /* vita hvort notandi sé innskráður */
-    console.log(isAuthenticated)
+    const { isAuthenticated, dispatch } = this.props; /* vita hvort notandi sé innskráður */
+
     return (
       <main className="main">
         <Helmet defaultTitle="Bókasafnið" titleTemplate="%s – Bókasafnið" />
