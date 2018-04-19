@@ -23,14 +23,13 @@ class Book extends Component {
   state = {
     loading: true,
     isRating: false,
+    markReadDone: false,
     review: '',
     rating: 1,
   }
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    console.log('HALLLLLLLLLLO')
 
     if (name) {
       this.setState({ [name]: value });
@@ -64,14 +63,16 @@ class Book extends Component {
 
   handleClickMarkRead = async () => {
     const { dispatch } = this.props;
-    let { review, rating } = this.state;
+    let { review, rating, markReadDone } = this.state;
     const { book } = this.props;
+    markReadDone = true;
+    this.setState({ markReadDone });
     rating = Number(rating);
     dispatch(updateReadBooks(book.id, review, rating));
   }
 
   handleClickCancel = async () => {    
-    let { isRating } = this.state;
+    let { isRating, markReadDone } = this.state;
     isRating = false;
     this.setState({ isRating });
   }
@@ -80,7 +81,7 @@ class Book extends Component {
   render() {
     const { book, loading, error } = this.props;
 
-    const { isRating, review, rating } = this.state;
+    const { isRating, review, rating, markReadDone } = this.state;
 
     if (loading) {
       return (<div>Sæki bók</div>);
@@ -90,7 +91,6 @@ class Book extends Component {
       return (<div>Villa við að sækja bók</div>);
     }
     const { title,  } = this.props;
-    
 
     return (
       <section className="book">
@@ -111,7 +111,7 @@ class Book extends Component {
           Breyta bók
         </NavLink><br></br>
  
-        {!isRating && (
+        {!isRating && !markReadDone && (
         <button className="book_button" onClick={this.handleClickRead}>
           Lesin bók
         </button>
@@ -119,7 +119,7 @@ class Book extends Component {
 
         <br></br>
         
-        {isRating && (
+        {isRating && !markReadDone && (
           <div>
           <form>
             <label htmlFor="review">Um bók:</label>
@@ -140,9 +140,7 @@ class Book extends Component {
             <br></br>
 
             <button className="book_button" onClick={this.handleClickMarkRead}>
-            <NavLink to={`/books`}>
               Vista
-            </NavLink>
             </button>
 
             <button className="book_button" onClick={this.handleClickCancel}>
@@ -151,6 +149,9 @@ class Book extends Component {
           </div>
         )}
 
+        {markReadDone && (
+          <p>Lestur skráður</p>
+        )}
         
       
         <button className="book_button">
@@ -175,5 +176,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Book);
-
-// asdf útfæra lesin bók

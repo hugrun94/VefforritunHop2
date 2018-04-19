@@ -97,7 +97,9 @@ class User extends Component {
                     {book.book_title}
                 </NavLink>
               </h3>
-              <p>Einkunn: {book.rating}. {book.review}</p>
+              <p>Einkunn: {book.rating}</p>
+              <br></br>
+              <p>Um bókina: {book.review}</p>
             </div>
           ))}
         </ul>
