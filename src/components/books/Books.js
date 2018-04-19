@@ -9,17 +9,6 @@ const queryString = require('query-string');
 
 class Books extends Component {
 
-  /*state = {
-    visibleNote: null,
-  }
-
-  onHeaderClick = (noteId) => {
-    return (e) => {
-      const visibleNote = this.state.visibleNote === noteId ? null : noteId;
-      this.setState({ visibleNote });
-    }
-  }*/
-
   state = { 
     page: 1,
     offset: 0,
@@ -38,24 +27,6 @@ class Books extends Component {
       dispatch(fetchBooks(`/books?offset=${this.state.offset}`));
     }
   }
-
-  /*async componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params !== prevProps.match.params) {
-      this.setState({ loading: true });
-
-    //const { dispatch } = this.props;
-    //dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
-
-      try {
-        const books = await this.fetchBooks(`/books?offset=${10 + this.state.offset}`);
-        this.setState({ books, loading: false });
-      } catch (error) {
-        console.error('Error fetching book', error);
-        this.setState({ error: true, loading: false });
-      }
-    }
-  }*/
-
 
 
   handleClick = async () => {

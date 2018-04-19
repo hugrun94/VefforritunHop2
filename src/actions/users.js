@@ -114,10 +114,10 @@ export const fetchUserBooks = (endpoint) => {
   }
 }
 
-export const updateReadBooks = (bookId, rating) => {
+export const updateReadBooks = (bookId, review, rating) => {
   return async (dispatch) => {
     try{
-      await post('users/me/read', {bookId, rating});
+      await post('/users/me/read', {bookId, review, rating});
     }
     catch(e){
       return dispatch(userBooksError(e));

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchBook } from '../../actions/books';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route, Redirect } from 'react-router-dom';
 import { updateReadBooks } from '../../actions/users';
 
 //import './Book.css';
@@ -23,6 +23,18 @@ class Book extends Component {
   state = {
     loading: true,
     isRating: false,
+    review: '',
+    rating: 1,
+  }
+
+  handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    console.log('HALLLLLLLLLLO')
+
+    if (name) {
+      this.setState({ [name]: value });
+    }
   }
 
   async componentDidMount() {
@@ -38,29 +50,37 @@ class Book extends Component {
   }
 
 
-  handleClickRead = async () => {
-    // Hér á að bætast við að notandi hafi lesið þessa bók
-    
-    const {readBooks, dispatch}  = this.props;
+  handleClickRead = async () => {    
     let { isRating } = this.state;
     isRating = true;
-    this.setState({ isRating });
-    dispatch(updateReadBooks())
-    // actions -> readBooks.push()
-    // gera setstate
-
-    /*const offset = this.state.offset - 10;
-    const page = this.state.page - 1;
-    this.setState({ offset, page });
-    this.setState({ loading: true });
-    const { dispatch } = this.props;
-    dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));*/
+    this.setState({ isRating });   
   }
+
+  handleRatingChange = (e) => {
+    const { rating } = this.state;
+    this.setState({ rating: e.target.value });
+  }
+
+
+  handleClickMarkRead = async () => {
+    const { dispatch } = this.props;
+    let { review, rating } = this.state;
+    const { book } = this.props;
+    rating = Number(rating);
+    dispatch(updateReadBooks(book.id, review, rating));
+  }
+
+  handleClickCancel = async () => {    
+    let { isRating } = this.state;
+    isRating = false;
+    this.setState({ isRating });
+  }
+
 
   render() {
     const { book, loading, error } = this.props;
 
-    const { isRating } = this.state;
+    const { isRating, review, rating } = this.state;
 
     if (loading) {
       return (<div>Sæki bók</div>);
@@ -70,7 +90,7 @@ class Book extends Component {
       return (<div>Villa við að sækja bók</div>);
     }
     const { title,  } = this.props;
-  
+    
 
     return (
       <section className="book">
@@ -91,13 +111,47 @@ class Book extends Component {
           Breyta bók
         </NavLink><br></br>
  
-        {!isRating && (<button className="book_button" onClick={this.handleClickRead}>
+        {!isRating && (
+        <button className="book_button" onClick={this.handleClickRead}>
           Lesin bók
-        </button>)}
-        
-        
+        </button>
+        )}
 
         <br></br>
+        
+        {isRating && (
+          <div>
+          <form>
+            <label htmlFor="review">Um bók:</label>
+            <br></br>
+            <input id="review" type="text" name="review" value={review} onChange={this.handleInputChange} />
+          </form>
+
+          
+          <label htmlFor="rating">Einkunn:</label>
+            <select id="rating" onChange={this.handleRatingChange} value={rating}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+
+            <br></br>
+
+            <button className="book_button" onClick={this.handleClickMarkRead}>
+            <NavLink to={`/books`}>
+              Vista
+            </NavLink>
+            </button>
+
+            <button className="book_button" onClick={this.handleClickCancel}>
+              Hætta við
+            </button>
+          </div>
+        )}
+
+        
       
         <button className="book_button">
           <NavLink to="../books">
