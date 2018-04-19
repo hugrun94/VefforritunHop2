@@ -155,10 +155,10 @@ class AddBook extends Component {
           </div>
           
 
-          <button disabled={isAdding}>Vista</button>
+          <button className="button"disabled={isAdding}>Vista</button>
         </form>
 
-        <button className="book_button">
+        <button className="button">
           <NavLink to={`../${book.id}`}>
           Til baka
           </NavLink>

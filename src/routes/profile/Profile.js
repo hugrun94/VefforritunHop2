@@ -5,6 +5,8 @@ import { fetchBooks } from '../../actions/books';
 import { editUsername, editPassword } from '../../actions/register';
 import { NavLink } from 'react-router-dom';
 
+import Button from '../../components/button'
+
 class Profile extends Component {
 
   state = {
@@ -110,7 +112,7 @@ class Profile extends Component {
             <input id="username" type="text" name="username" value={username} onChange={this.handleInputChange} />
           </div>
 
-          <button disabled={isAdding}>Uppfæra nafn</button>
+          <button className="button" disabled={isAdding}>Uppfæra nafn</button>
 
         </form>
 
@@ -126,7 +128,7 @@ class Profile extends Component {
             <input id="password2" type="text" name="password2" onChange={this.handleInputChange} />
           </div>
 
-          <button disabled={isAdding}>Uppfæra lykilorð</button>
+          <button className="button" disabled={isAdding}>Uppfæra lykilorð</button>
 
         </form>
 
