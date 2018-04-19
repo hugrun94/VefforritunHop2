@@ -19,31 +19,27 @@ class AddBook extends Component {
     categorytitle: '',
   }
 
+
+
   handleInputChange = (e) => {
 
-    const { dispatch } = this.props;
-
-    const { path } = this.props.match;
-
     const { name, value } = e.target;
+    this.setState({[name]: value });
 
-    if (name) {
-      this.setState({ [name]: value });
-      //dispatch(editBook({[name]: value}));
-    }
-
-    
   }
 
   handleSubmit = async (e) => {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { title, author, description, isbn10, isbn13, category, published, pagecount, language, categorytitle } = this.state;
+    const { title, author, description, category, published, pagecount, language, categorytitle } = this.state;
+
 
     const { path } = this.props.match;
 
     const { book } = this.props.match.params;
+
+    const { isbn10, isbn13 } = this.props.book;
 
     
     
@@ -53,15 +49,31 @@ class AddBook extends Component {
     //dispatch(recieveLogin(token));
     
 
-    //if (path === '/books/new') {
+    if (path === '/books/new') {
       dispatch(addBook(title, author, description, isbn10, isbn13, 12, published, pagecount, language, categorytitle));
-    //}
-    // asdf vantar else...
+    }else if(path === "/books/:book/edit"){
+      console.log(book)
+      dispatch(editBook(book, title, author, description, isbn10, isbn13, 12, published, pagecount, language, categorytitle));
+
+    }
+  
   }
+   /* componentDidMount() {
+    const {book} = this.props;
+
+    const { path } = this.props.match;
+    
+    let { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle } = this.state;
+    if(path === "/books/:book/edit" ){
+      this.setState({[title]: book.title})
+    }
+
+  }*/
 
   render() {
     //const { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle } = this.state;
-    const { isAdding, book, errors } = this.props;
+    const { isAdding,book, errors } = this.props;
+    console.log(book.title)
 
     //let { title, author, description, isbn10, isbn13, category, published, pagecount, language, categorytitle } = this.state;
     const { 
@@ -74,7 +86,6 @@ class AddBook extends Component {
       pagecount,
       language,
     } = book;
-
 
 
     console.log(this.props.match)
@@ -100,17 +111,17 @@ class AddBook extends Component {
 
           <div>
             <label htmlFor="title">Titill:</label>
-            <input id="title" type="text" name="title" value={title} onChange={this.handleInputChange} />
+            <input id="title" type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
           </div>
 
           <div>
             <label htmlFor="author">Höfundur:</label>
-            <input id="author" type="text" name="author" value={author} onChange={this.handleInputChange} />
+            <input id="author" type="text" name="author" value={this.state.author} onChange={this.handleInputChange} />
           </div>
           
           <div>
             <label htmlFor="description">Lýsing:</label>
-            <input id="description" type="text" name="description" value={description} onChange={this.handleInputChange} />
+            <input id="description" type="text" name="description" value={this.state.description} onChange={this.handleInputChange} />
           </div>
 
           <div>
@@ -141,17 +152,17 @@ class AddBook extends Component {
 
           <div>
             <label htmlFor="published">Útgefin:</label>
-            <input id="published" type="text" name="published" value={published} onChange={this.handleInputChange} />
+            <input id="published" type="text" name="published" value={this.state.published} onChange={this.handleInputChange} />
           </div>
 
           <div>
             <label htmlFor="pagecount">Fjöldi síða:</label>
-            <input id="pagecount" type="text" name="pagecount" value={pagecount} onChange={this.handleInputChange} />
+            <input id="pagecount" type="text" name="pagecount" value={this.state.pagecount} onChange={this.handleInputChange} />
           </div>
 
           <div>
             <label htmlFor="language">Tungumál:</label>
-            <input id="language" type="text" name="language" value={language} onChange={this.handleInputChange} />
+            <input id="language" type="text" name="language" value={this.state.language} onChange={this.handleInputChange} />
           </div>
           
 
