@@ -28,6 +28,8 @@ Af innskráningarsíðu er hlekkur yfir á skráningarsíðu.
 Óinnskráðir notendur geta:
 
 * Skoðað allar síður af bókum á `/books`
+* Skoðað bók á `/books/:id`
+  - Í fyrri útgáfu af þessari lýsingu var þetta ekki skýrt tekið fram, er því bæði tekið gilt: að óinnskráður geti skoðað eða ekki
 * Leitað að bókum, t.d. `/books?query=book`
 * Búið sér til aðgang á `/register`
 * Skráð sig inn á `/login`
@@ -38,15 +40,17 @@ Innskráðir notendur geta:
   - Setja inn mynd
   - Uppfæra nafn
   - Uppfæra lykilorð
+  - Séð lestur á bókum og eytt lestri
 * Skráð nýja bók á `/books/new`
 * Skoðað bók á `/books/:id` og á sama stað
   - Skráð lestur á bók
-  - Eytt lestur á bók
 * Uppfært bók sem til er á `/books/:id/edit`
 * Skoðað lista af notendum á `/users`
 * Skoðað notendur og lestur þeirra á `/users/:id`
 
 Allar aðgerðir tengjast viðeigandi aðgerðum í vefþjónustu.
+
+Fyrri útgáfa hafði þá kröfu að geta séð lestur og eytt lestri á hverri bók. Sú krafa var fjarlægð og sett inn krafa um að geta eytt lestri á `/profile` þar sem það passar betur við vefþjónustu. Í sýnilausn á vefþjónustu er [búið að bæta við titli á bók](https://github.com/vefforritun/vef2-2018-h1-synilausn/commit/5f1a433b76930e2c5752027fa525b4d275aa1fdd) sem gerir þessa birtingu mögulega án vandræða. Ef búið var að útfæra skv. fyrri kröfu þar **ekki** að gera breytingu á lausn.
 
 ## Leit og síður
 
@@ -54,11 +58,16 @@ Leit er aðgengileg úr haus og við að leitað er skal setja í querystring hv
 
 ## Form og tenging við vefþjónustu
 
+Hægt er að nota sýnilausn við hópverkefni 1 sem keyrir á Heroku: https://vefforritun2-h1-synilausn.herokuapp.com/
+Í þróun er þó ráðlagt að keyra lausn á eigin vél. Það gerir villur skýrari og er töluvert hraðara í keyrslu.
+
 Fyrir form er nóg að nota attribute á elementum fyrir _client side validation_, t.d. `<input required>`. Staðfesting í vefþjónustu skal tryggja að öll gögn séu rétt og þarf því að birta villur þaðan rétt.
 
 Ekki er krafa um að geta uppfært einn og einn reit á bók í einu, aðeins á notanda.
 
 Ekki er krafa um að geta útbúið nýja flokka.
+
+Þegar valinn er flokkur fyrir bók er nóg að sýna aðeins eina síðu af flokkum, ekki þarf að gera flóknari útfærslu sem sækir allar síður.
 
 Æskilegt er að hjúpa alla tengingu við vefþjónustu í einni skrá, t.d. `api.js` í rót verkefnis. Þar er hægt að lesa úr `env` hver slóð er, hver token er úr `localStorage` og gera fyrirspurnir með `fetch`. Annaðhvort er hægt að gera sér föll fyrir hverja HTTP aðferð (t.d. `get()`, `post()` o.s.fr.) eða útfæra almennt fall sem tekur við aðferð (t.d. `call(method)`). Ef villa kemur frá vefþjónustu um að token sé útrunnið skal færa notanda á t.d. `/login?tokenExpired` (í lagi að nota `window.location` þó það sé svolítið _skrítið_) þar sem birt eru viðeigandi skilaboð.
 
