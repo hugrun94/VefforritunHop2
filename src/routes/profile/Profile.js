@@ -111,12 +111,12 @@ class Profile extends Component {
       <div className="wrapper">
         <h2>Upplýsingar</h2>
 
-        <form action="../profile">
+        <form className="even_form" action="../profile">
           <input type="file" name="pic" accept="image/*"/>
           <input type="submit"/>
         </form>
 
-        <form onSubmit={this.handleSubmitName}>
+        <form className="even_form" onSubmit={this.handleSubmitName}>
 
           <div>
             <label htmlFor="username">Nafn:</label>
@@ -127,7 +127,7 @@ class Profile extends Component {
 
         </form>
 
-        <form onSubmit={this.handleSubmitPassword}>
+        <form className="even_form" onSubmit={this.handleSubmitPassword}>
 
           <div>
             <label htmlFor="password">Lykilorð:</label>
@@ -160,7 +160,7 @@ class Profile extends Component {
                 )}
                 {console.log(readBooks)}
 
-                <button className="button" onClick={() => this.handleClickDelete(book.readBookId)}>
+                <button className="button_delete" onClick={() => this.handleClickDelete(book.readBookId)}>
                   Eyða
                 </button>
               </li>

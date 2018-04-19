@@ -124,7 +124,7 @@ class Book extends Component {
         
         {isRating && !markReadDone && (
           <div>
-          <form>
+          <form className="even_form">
             <label htmlFor="review">Um bók:</label>
             <br></br>
             <input id="review" type="text" name="review" value={review} onChange={this.handleInputChange} />
