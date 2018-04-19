@@ -5,25 +5,20 @@
 	align-items:center;
 	justify-content:space-between;
 	height: 80px;
+	/*margin-left: none;*/
 }
-/*
-.button {
-	padding: 10px 20px;
-	border: 0;
-	border-radius: 5px;
-	color: #fff;
-	background-color: #4e1d04;
-	font-size: 1rem;
-	}*/
 	
-	.link_white {
-		color: #FFF;
-		text-decoration: none;
-	}
+.link_white {
+	color: #FFF;
+	text-decoration: none;
+}
 
-  .search {
+.search {
 	color: #fff;
 	text-decoration: none;
-  }
+}
 
-
+.header_link {
+	text-decoration: none;
+	position: relative;
+}
