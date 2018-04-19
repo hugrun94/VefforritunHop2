@@ -72,7 +72,7 @@ class Books extends Component {
 
     return (
       <section className="wrapper">
-        <h2>Bækur</h2>
+        <h2>Bækur</h2><br></br>
         <ul>
           {books.map((book) => (
             <div>

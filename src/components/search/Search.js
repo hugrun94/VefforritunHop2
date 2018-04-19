@@ -101,7 +101,7 @@ class Search extends Component {
               {book.published && (<span>, gefin út {book.published}</span>)}
             </div>
           ))}
-        </ul>
+        </ul><br></br><br></br>
         {this.state.page > 1 && 
           <button className="previous" onClick={this.handleClickPrevious}>
           <NavLink exact
