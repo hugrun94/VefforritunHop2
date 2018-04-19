@@ -123,7 +123,7 @@ class Profile extends Component {
     }
 
     return (
-      <div>
+      <div className="wrapper">
         <h2>Upplýsingar</h2>
 
         <form onSubmit={this.handleSubmitPhoto}>

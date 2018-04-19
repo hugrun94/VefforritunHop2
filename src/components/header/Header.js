@@ -49,18 +49,20 @@ class Header extends Component {
 
     return (
       <header className="header">
-        <h1 className="header__heading"><Link to="/">Bókasafnið</Link></h1>
+        <h1 className="header__heading"><Link className="header_link" to="/">Bókasafnið</Link></h1>
 
         {/* ætti samt frekar heima í sér component */}
-        <form className="header_form">
-          <input id="search" type="text" name="query" onChange={this.handleInputChange} />
-        </form>
-        <button className="button" onClick={this.onClick}>
-          <NavLink exact className="header_link"
-            to={`/books?search=${this.state.query}`} className="search">
-            Leita
-          </NavLink>
-        </button>
+        <div className="search_div">
+          <form className="header_form">
+            <input id="search" type="text" name="query" onChange={this.handleInputChange} />
+          </form>
+          <button className="button" onClick={this.onClick}>
+            <NavLink exact className="header_link"
+              to={`/books?search=${this.state.query}`} className="search">
+              Leita
+            </NavLink>
+          </button>
+        </div>
         
         {isAuthenticated &&
           <div>
@@ -72,7 +74,7 @@ class Header extends Component {
             to= '/profile'>
             {parsedUser.image}
           </NavLink>
-        <button className="button" onClick={this.handleLogout}>Útskrá</button>
+        <button className="logout_button" onClick={this.handleLogout}>Útskrá</button>
         </div>
       }
         {!isAuthenticated &&
