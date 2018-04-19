@@ -39,8 +39,9 @@ state = {
 
   render() {
     const { username, password } = this.state;
-    const { isFetching, isAuthenticated, message } = this.props;
+    const { dispatch, isFetching, isAuthenticated, message } = this.props;
     console.log(message);
+
 
 
     if (isAuthenticated) {
@@ -53,6 +54,7 @@ state = {
         </div>
       );
     }
+
 
     if (isFetching) {
       return (
