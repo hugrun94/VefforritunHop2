@@ -52,11 +52,11 @@ class Header extends Component {
         <h1 className="header__heading"><Link to="/">Bókasafnið</Link></h1>
 
         {/* ætti samt frekar heima í sér component */}
-        <form>
+        <form className="header_form">
           <input id="search" type="text" name="query" onChange={this.handleInputChange} />
         </form>
         <button className="button" onClick={this.onClick}>
-          <NavLink exact className="link_white"
+          <NavLink exact className="header_link"
             to={`/books?search=${this.state.query}`} className="search">
             Leita
           </NavLink>
@@ -76,7 +76,7 @@ class Header extends Component {
         </div>
       }
         {!isAuthenticated &&
-        <Link to="/login">Innskráning</Link> }
+        <Link className="header_link" to="/login">Innskráning</Link> }
       </header>
     );
   }

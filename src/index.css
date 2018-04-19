@@ -18,6 +18,7 @@ body {
 
   font-size: 16px;
   font-family: 'Open sans', sans-serif;
+  text-align: left;
 }
 
 h1,
@@ -33,4 +34,17 @@ a {
 
 p {
   margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .header {
+    display: block;
+    float: left;
+    flex-direction:column;
+  }
+}
+
+.wrapper {
+  margin-top: 25px;
+  margin-left: 100px;
 }

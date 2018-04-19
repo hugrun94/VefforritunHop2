@@ -79,7 +79,8 @@ class Book extends Component {
 
 
   render() {
-    const { book, loading, error } = this.props;
+    const { book, loading, error,isAuthenticated } = this.props;
+    console.log(isAuthenticated)
 
     const { isRating, review, rating, markReadDone } = this.state;
 
@@ -105,13 +106,15 @@ class Book extends Component {
           <p>Tungumál: {book.language}</p>
         </li>
 
+        {isAuthenticated && (
         <NavLink exact
           to={`/books/${book.id}/edit`}
           params={{book }}>
           Breyta bók
-        </NavLink><br></br>
+        </NavLink>)}
+        <br></br>
  
-        {!isRating && !markReadDone && (
+        {isAuthenticated && !isRating && !markReadDone && (
         <button className="button" onClick={this.handleClickRead}>
           Lesin bók
         </button>
@@ -170,7 +173,7 @@ const mapStateToProps = (state) => {
     isFetching: state.books.isFetching,
     book: state.books.book,
     error: state.books.error,
-    isAuthenticated: state.users.isAuthenticated,
+    isAuthenticated: state.auth.isAuthenticated,
     readBooks: state.users.readBooks,
   }
 }
