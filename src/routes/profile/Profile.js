@@ -5,6 +5,8 @@ import { fetchBooks } from '../../actions/books';
 import { editUsername, editPassword } from '../../actions/register';
 import { NavLink } from 'react-router-dom';
 
+import Button from '../../components/button'
+
 class Profile extends Component {
 
   state = {
@@ -129,20 +131,21 @@ class Profile extends Component {
         <form onSubmit={this.handleSubmitPhoto}>
           <input type="file" onChange={this.handleChange}/>
           <button disabled={!photo}>Submit</button>
+
         </form>
 
-        <form onSubmit={this.handleSubmitName}>
+        <form className="even_form" onSubmit={this.handleSubmitName}>
 
           <div>
             <label htmlFor="username">Nafn:</label>
             <input id="username" type="text" name="username" value={username} onChange={this.handleInputChange} />
           </div>
 
-          <button disabled={isAdding}>Uppfæra nafn</button>
+          <button className="button" disabled={isAdding}>Uppfæra nafn</button>
 
         </form>
 
-        <form onSubmit={this.handleSubmitPassword}>
+        <form className="even_form" onSubmit={this.handleSubmitPassword}>
 
           <div>
             <label htmlFor="password">Lykilorð:</label>
@@ -154,7 +157,7 @@ class Profile extends Component {
             <input id="password2" type="password" name="password2" onChange={this.handleInputChange} />
           </div>
 
-          <button disabled={isAdding}>Uppfæra lykilorð</button>
+          <button className="button" disabled={isAdding}>Uppfæra lykilorð</button>
 
         </form>
 
@@ -174,7 +177,7 @@ class Profile extends Component {
                   <p>Um bókina: {book.review}</p>
                 )}
 
-                <button className="button" onClick={() => this.handleClickDelete(book.readBookId)}>
+                <button className="button_delete" onClick={() => this.handleClickDelete(book.readBookId)}>
                   Eyða
                 </button>
               </li>

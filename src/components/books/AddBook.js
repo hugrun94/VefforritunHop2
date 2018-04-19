@@ -79,7 +79,7 @@ class AddBook extends Component {
     }
     
     return (
-      <div>
+      <div className="wrapper">
         {errors && (
           <ul>{errors.map((error, i) => (
             <li key={i}>
@@ -88,7 +88,7 @@ class AddBook extends Component {
           ))}</ul>
         )}
 
-        <form onSubmit={this.handleSubmit}>
+        <form className="even_form" onSubmit={this.handleSubmit}>
 
           <div>
             <label htmlFor="title">Titill:</label>
@@ -149,7 +149,7 @@ class AddBook extends Component {
           </div>
           
 
-          <button disabled={isAdding}>Vista</button>
+          <button className="button"disabled={isAdding}>Vista</button>
         </form>
 
         <button className="button"> 
