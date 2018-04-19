@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchBooks } from '../../actions/books';
 import { logoutUser } from '../../actions/auth';
 
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { Link, NavLink, Redirect, Route } from 'react-router-dom';
 
 import Button from '../button';
 
@@ -20,6 +20,17 @@ class Header extends Component {
   onClick = (e) => {
     console.log('leita');
     //<Redirect to={`/books?search=${this.state.query}`} />
+    return (
+      <div>
+      <Route path="/books" render={() => (
+        <div>
+          <Redirect to={`/books?search=${this.state.query}`}/>
+          </div>
+      )}/>
+      
+      </div>
+    );
+
   }
 
   handleInputChange = (e) => {

@@ -170,11 +170,14 @@ export const updateReadBooks = (bookId, review, rating) => {
 
 export const deleteReadBooks = (bookId) => {
   return async (dispatch) => {
+    let users;
     try {
       await deleteh(`/users/me/read/${bookId}`, {bookId});
+      users = await get('/users/me/read');
     }
     catch(e) {
       return dispatch(userBooksError(e));
     }
+    dispatch(receiveUserBooks(users.result.items));
   }
 }
