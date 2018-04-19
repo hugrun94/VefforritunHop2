@@ -10,8 +10,8 @@ class Home extends Component {
 		console.log(token);
     if(token != null){
     	return (
-	      <div>
-	        <h2>Velkomin á bókasafnið</h2>
+	      <div className="wrapper">
+	        <h2>Velkomin á bókasafnið</h2><br></br>
 	        <p>Þú ert skráður notandi og getur því <Link to="/books/new">skráð bækur</Link> og breytt <Link to="/books">þeim sem til eru.</Link>  </p>
 	        <p>Einnig getur þú skoðað <Link to="/users">aðra notendur</Link></p>
 	      </div>

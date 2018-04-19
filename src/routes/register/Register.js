@@ -61,7 +61,7 @@ state = {
 
     console.log(message)
     return (
-      <div>
+      <div className="wrapper">
       {!validRegister && message && (
           <ul>{message.map((errors, i) => (
             <li key={i}>

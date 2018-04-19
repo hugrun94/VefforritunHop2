@@ -24,4 +24,20 @@
 
 .header_form {
 	position: relative;
+	margin: 20px 0px;
+  	padding: 10px 20px;
 }
+
+.search_div{
+	display: inline-flex;
+	flex-direction: row;
+}
+
+@media only screen and (max-width: 500px) {
+	.search_div {
+		position: relative;
+		display: block;
+		float: left;
+		flex-direction:column;
+	}
+  }

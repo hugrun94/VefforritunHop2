@@ -94,7 +94,7 @@ class Book extends Component {
     const { title,  } = this.props;
 
     return (
-      <section className="book">
+      <section className="wrapper">
         <li className="book">
           <h3 className="book__header">{book.title}</h3>
           <p>Eftir {book.author}</p>

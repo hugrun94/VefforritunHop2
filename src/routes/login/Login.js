@@ -65,7 +65,7 @@ state = {
     console.log(message)
 
     return (
-      <div>
+      <div className="wrapper">
         {message && (
           <p>{message}</p>
         )}
