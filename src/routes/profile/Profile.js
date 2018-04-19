@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUser, fetchUserBooks, deleteReadBooks } from '../../actions/users';
+import { fetchUser, fetchUserBooks, deleteReadBooks, addUserPhoto } from '../../actions/users';
 import { fetchBooks } from '../../actions/books';
 import { editUsername, editPassword } from '../../actions/register';
 import { NavLink } from 'react-router-dom';
@@ -11,6 +11,7 @@ class Profile extends Component {
     username: '',
     password: '',
     password2: '',
+    photo: null,
     deleteRead: false,
   }
 
@@ -52,6 +53,22 @@ class Profile extends Component {
     //}
   }
 
+  handleChange = async (e) => {
+    const { photo } = this.state;
+    const { files } = e.target;
+    this.setState({ 
+      photo: files[0],
+    })
+  }
+
+  handleSubmitPhoto = (e) => {
+    e.preventDefault();
+    const { photo } = this.state;
+    console.log(photo)
+    const { dispatch } = this.props;
+    dispatch(addUserPhoto(photo));
+  }
+
   handleSubmitPassword = async (e) => {
     e.preventDefault();
 
@@ -84,7 +101,7 @@ class Profile extends Component {
 
     const { isAdding, user, errors, readBooks, books } = this.props;
 
-    const { username, password } = this.state;
+    const { username, password, photo } = this.state;
 
     const userLoggedIn = window.localStorage.getItem('user');
     console.log(userLoggedIn)
@@ -109,9 +126,9 @@ class Profile extends Component {
       <div>
         <h2>Upplýsingar</h2>
 
-        <form action="../profile">
-          <input type="file" name="pic" accept="image/*"/>
-          <input type="submit"/>
+        <form onSubmit={this.handleSubmitPhoto}>
+          <input type="file" onChange={this.handleChange}/>
+          <button disabled={!photo}>Submit</button>
         </form>
 
         <form onSubmit={this.handleSubmitName}>
@@ -129,12 +146,12 @@ class Profile extends Component {
 
           <div>
             <label htmlFor="password">Lykilorð:</label>
-            <input id="password" type="text" name="password" onChange={this.handleInputChange} />
+            <input id="password" type="password" name="password" onChange={this.handleInputChange} />
           </div>
 
           <div>
             <label htmlFor="password2">Lykilorð, aftur:</label>
-            <input id="password2" type="text" name="password2" onChange={this.handleInputChange} />
+            <input id="password2" type="password" name="password2" onChange={this.handleInputChange} />
           </div>
 
           <button disabled={isAdding}>Uppfæra lykilorð</button>
@@ -146,7 +163,7 @@ class Profile extends Component {
           {bookTitles.map((book) => (
             
               <li key={book.book_id}>
-                <h3 key={book.book_id}>
+                <h3>
                   <NavLink exact
                       to={`/books/${book.book_id}`}>
                       {book.book_title}
@@ -156,7 +173,6 @@ class Profile extends Component {
                 {book.review && (
                   <p>Um bókina: {book.review}</p>
                 )}
-                {console.log(readBooks)}
 
                 <button className="button" onClick={() => this.handleClickDelete(book.readBookId)}>
                   Eyða
@@ -177,6 +193,7 @@ const mapStateToProps = (state) => {
     isAdding: state.users.isAdding,
     user: state.users.user,
     readBooks: state.users.readBooks,
+    photo: state.users.photo,
     errors: state.users.errors,
     books: state.books.books,
     isAuthenticated: state.users.isAuthenticated,

@@ -7,6 +7,9 @@ import {
   USER_READ_ERROR, 
   USER_READ_SUCCESS, 
   USER_READ_UPDATE_SUCCESS,
+  USER_PHOTO_REQUEST,
+  USER_PHOTO_ERROR,
+  USER_PHOTO_SUCCESS,
 } from '../actions/users';
 
 
@@ -16,6 +19,7 @@ const initialState = {
   user: [],
   error: null,
   errors: [],
+  photo: null,
   isAuthenticated: false,
   readBooks: [],
 };
@@ -82,7 +86,29 @@ export default (state = initialState, action) => {
         readBooks: action.readBooks,
         isAuthenticated: action.isAuthenticated,
       }
+    
+    case USER_PHOTO_REQUEST:
+      return {
+        ...state,
+        isAdding: action.isAdding,
+        errors: [],
+      };
 
+    case USER_PHOTO_ERROR:
+      return {
+        ...state,
+        isAdding: action.isAdding,
+        errors: action.errors,
+      };
+
+    case USER_PHOTO_SUCCESS:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        photo: action.photo,
+        error: action.error,
+      };
+    
     default:
       return state;
   }
