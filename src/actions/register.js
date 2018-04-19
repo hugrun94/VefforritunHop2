@@ -26,6 +26,7 @@ function requestUser() {
 }
 
 function userError(message) {
+  console.log(message)
   return {
     type: NEWUSER_FAILURE,
     isFetching: false,
@@ -58,7 +59,10 @@ export const addUser = (username,password,name) => {
        } catch (e) {
       return dispatch(userError(e))
     }
-    console.log(user.result);
+    if (user.status >= 400) {
+      return dispatch(userError(user.result.errors))
+    }
+    console.log(user.status);
     console.log("dfaklæka")
     return dispatch(receiveuser(user.result))
 

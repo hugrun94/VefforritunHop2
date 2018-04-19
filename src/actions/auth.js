@@ -61,8 +61,10 @@ export const loginUser = (username, password) => {
     }
 
     if (!login.loggedin) {
-      dispatch(loginError(login.error))
+      dispatch(loginError(login.result.error))
     }
+
+    console.log(login)
 
     if (login.status === 200) {
       const { user, token } = login.result;
