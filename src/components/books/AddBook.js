@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addBook, editBook } from '../../actions/books';
+import { addBook, editBook, fetchCategories } from '../../actions/books';
 import { NavLink } from 'react-router-dom'
-//import { recieveLogin } from '../../actions/auth';
 
 class AddBook extends Component {
 
@@ -19,13 +18,21 @@ class AddBook extends Component {
     categorytitle: '',
   }
 
-
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchCategories('/categories'));
+  }
 
   handleInputChange = (e) => {
-
     const { name, value } = e.target;
     this.setState({[name]: value });
 
+  }
+
+  handleCategoryChange = (e) => {
+    const { category } = this.state;
+    this.setState({ category: e.target.value });
+    console.log(category)
   }
 
   handleSubmit = async (e) => {
@@ -37,45 +44,23 @@ class AddBook extends Component {
 
     const { path } = this.props.match;
 
-    const { book } = this.props.match.params;
-
-    const { isbn10, isbn13 } = this.props.book;
-
-    
-    
     let token = localStorage.getItem('user');
 
-    console.log(token)
-    //dispatch(recieveLogin(token));
-    
-
     if (path === '/books/new') {
+      const { isbn10, isbn13 } = this.state;
       dispatch(addBook(title, author, description, isbn10, isbn13, 12, published, pagecount, language, categorytitle));
     }else if(path === "/books/:book/edit"){
-      console.log(book)
+      const { book } = this.props.match.params;
+      const { isbn10, isbn13 } = this.props.book;
       dispatch(editBook(book, title, author, description, isbn10, isbn13, 12, published, pagecount, language, categorytitle));
-
     }
   
   }
-   /* componentDidMount() {
-    const {book} = this.props;
-
-    const { path } = this.props.match;
-    
-    let { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle } = this.state;
-    if(path === "/books/:book/edit" ){
-      this.setState({[title]: book.title})
-    }
-
-  }*/
 
   render() {
-    //const { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle } = this.state;
-    const { isAdding,book, errors } = this.props;
-    console.log(book.title)
-
-    //let { title, author, description, isbn10, isbn13, category, published, pagecount, language, categorytitle } = this.state;
+    const { isAdding, book, categories, errors } = this.props;
+    const { category } = this.state;
+    
     const { 
       title,
       author,
@@ -87,16 +72,12 @@ class AddBook extends Component {
       language,
     } = book;
 
-
-    console.log(this.props.match)
-    //console.log(book)
-
     if (isAdding) {
       return (
         <p>Skrái bók...</p>
       );
     }
-    //ASDF ekki harðkóða categories!
+    
     return (
       <div className="wrapper">
         {errors && (
@@ -126,17 +107,19 @@ class AddBook extends Component {
 
           <div>
           <label htmlFor="category">Flokkur:</label>
-            <select name="category">
-              <option value="fiction">Fiction</option>
-              <option value="fantasy">Fantasy</option>
-              <option value="computerScience">Computer Science</option>
-              <option value="design">Design</option>
-              <option value="psychology">Psychology</option>
-              <option value="nonfiction">Nonfiction</option>
-              <option value="business">Business</option>
-              <option value="economics">Economics</option>
-              <option value="horror">Horror</option>
-              <option value="graphicNovel">Graphic Novel</option>
+            <select id="category" onChange={this.handleCategoryChange} value={category}>
+              <option value="Comic">Comic</option>  
+              <option value="Fantasy">Fantasy</option> 
+              <option value="Computer Science">Computer Science</option>               
+              <option value="Fiction">Fiction</option>  
+              <option value="Psychology">Psychology</option>  
+              <option value="Science Fiction">Science Fiction</option>  
+              <option value="Business">Business</option>  
+              <option value="Nonfiction">Nonfiction</option>  
+              <option value="Design">Design</option>  
+              <option value="Horror">Horror</option>  
+              <option value="Economics">Economics</option>  
+              <option value="Graphic Novel">Graphic Novel</option>  
             </select>
           </div>
 
@@ -170,7 +153,7 @@ class AddBook extends Component {
         </form>
 
         <button className="button"> 
-        <NavLink className="link_white" to={`../${book.id}`}>
+          <NavLink className="link_white" to={`../${book.id}`}>
             Til baka
           </NavLink>
         </button>
@@ -180,12 +163,12 @@ class AddBook extends Component {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state.books.book)
   return {
     isAdding: state.books.isAdding,
     book: state.books.book,
+    categories: state.books.categories,
     errors: state.books.errors,
-    isAuthenticated: state.books.isAuthenticated,
+    isAuthenticated: state.auth.isAuthenticated,
   }
 }
 

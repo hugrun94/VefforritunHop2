@@ -97,13 +97,13 @@ class Book extends Component {
       <section className="wrapper">
         <li className="book">
           <h3 className="book__header">{book.title}</h3>
-          <p>Eftir {book.author}</p>
-          <p>ISBN13: {book.isbn13}</p>
-          <p>{book.categorytitle}</p>
-          <p>{book.description}</p>
-          <p>{book.pagecount} síður</p>
-          <p>Gefin út {book.published}</p>
-          <p>Tungumál: {book.language}</p>
+          {book.author && (<p>Eftir {book.author}</p>)}
+          {book.isbn13 && (<p>ISBN13: {book.isbn13}</p>)}
+          {book.categorytitle && (<p>{book.categorytitle}</p>)}
+          {book.description && (<p>{book.description}</p>)}
+          {book.pagecount && (<p>{book.pagecount} síður</p>)}
+          {book.published && (<p>Gefin út {book.published}</p>)}
+          {book.language && (<p>Tungumál: {book.language}</p>)}
         </li>
 
         {isAuthenticated && (

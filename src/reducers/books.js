@@ -8,7 +8,10 @@ import {
   BOOKS_ADD_SUCCESS,
   BOOKS_EDIT_REQUEST, 
   BOOKS_EDIT_ERROR, 
-  BOOKS_EDIT_SUCCESS  
+  BOOKS_EDIT_SUCCESS,
+  BOOK_CATEGORIES_ERROR,
+  BOOK_CATEGORIES_REQUEST,
+  BOOK_CATEGORIES_SUCCESS,
 } from '../actions/books';
 
 const initialState = {
@@ -16,6 +19,7 @@ const initialState = {
   isAdding: false,
   books: [],
   book: [],
+  categories: [],
   error: null,
   errors: [],
   isAuthenticated: false,
@@ -93,6 +97,26 @@ export default (state = initialState, action) => {
         ...state,
         isAdding: action.isAdding,
         books: [...state.books, action.book],
+        error: action.error,
+      };
+    case BOOK_CATEGORIES_REQUEST:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+      };
+
+    case BOOK_CATEGORIES_ERROR:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        categories: action.categories,
+        error: action.error,
+      };
+    case BOOK_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        categories: action.categories,
         error: action.error,
       };
 

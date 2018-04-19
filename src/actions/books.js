@@ -4,6 +4,9 @@ export const BOOKS_REQUEST = 'BOOKS_REQUEST';
 export const BOOKS_ERROR = 'BOOKS_ERROR';
 export const BOOKS_SUCCESS = 'BOOKS_SUCCESS';
 export const BOOK_SUCCESS = 'BOOK_SUCCESS';
+export const BOOK_CATEGORIES_REQUEST = 'BOOK_CATEGORIES_REQUEST';
+export const BOOK_CATEGORIES_ERROR = 'BOOK_CATEGORIES_ERROR';
+export const BOOK_CATEGORIES_SUCCESS = 'BOOK_CATEGORIES_SUCCESS';
 
 function requestBooks() {
   return {
@@ -36,6 +39,32 @@ function receiveBook(book) {
     type: BOOK_SUCCESS,
     isFetching: false,
     book,
+    error: null,
+  }
+}
+
+function requestCategories() {
+  return {
+    type: BOOK_CATEGORIES_REQUEST,
+    isFetching: true,
+    error: null,
+  }
+}
+
+function categoriesError(error) {
+  return {
+    type: BOOK_CATEGORIES_ERROR,
+    isFetching: true,
+    categories: [],
+    error: error,
+  }
+}
+
+function recieveCategories(categories) {
+  return {
+    type: BOOK_CATEGORIES_SUCCESS,
+    isFetching: false,
+    categories,
     error: null,
   }
 }
@@ -126,6 +155,20 @@ export const fetchBook = (endpoint) => {
     }
     
     dispatch(receiveBook(books.result));
+  }
+}
+
+export const fetchCategories = (endpoint) => {
+  return async (dispatch) => {
+    dispatch(requestCategories());
+    let categories;
+    try {
+      categories = await get(endpoint);
+    } catch (e) {
+      return dispatch(categoriesError(e));
+    }
+    console.log(categories)
+    dispatch(recieveCategories(categories.result.items));
   }
 }
 
