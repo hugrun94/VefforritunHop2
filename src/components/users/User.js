@@ -104,8 +104,8 @@ class User extends Component {
 
 
         <button className="button">
-          <NavLink to="../users">
-          Til baka í notendur
+        <NavLink className="link_white" to="../users">
+            Til baka í notendur
           </NavLink>
         </button>
       </section>

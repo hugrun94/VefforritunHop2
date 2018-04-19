@@ -111,9 +111,9 @@ class Search extends Component {
         </button>}
         <span>Síða {this.state.page} </span>
         <button className="button" onClick={this.handleClick}>
-          <NavLink exact
+          <NavLink exact className="link_white"
             to={`/books?offset=${10 + this.state.offset}`}>
-            Næsta síða
+              Næsta síða >
           </NavLink>
         </button>
       </section>

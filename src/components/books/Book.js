@@ -100,8 +100,8 @@ class Book extends Component {
         <br></br>
       
         <button className="button">
-          <NavLink to="../books">
-          Til baka
+          <NavLink className="link_white" to="../books">
+            Til baka
           </NavLink>
         </button>
       </section>

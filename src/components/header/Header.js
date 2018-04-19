@@ -52,7 +52,7 @@ class Header extends Component {
           <input id="search" type="text" name="query" onChange={this.handleInputChange} />
         </form>
         <button className="button" onClick={this.onClick}>
-          <NavLink exact
+          <NavLink exact className="link_white"
             to={`/books?search=${this.state.query}`} className="search">
             Leita
           </NavLink>

@@ -76,12 +76,12 @@ state = {
           </div>
         <button className="button" onClick={this.handleSubmit}>
           {!message && ( 
-            <NavLink exact
+            <NavLink exact className="link_white"
             to='/login' className="register">
             Nýskrá
           </NavLink>)}
           {message && (
-        <NavLink exact
+        <NavLink exact className="link_white"
             to='/register' className="register">
             Nýskrá
           </NavLink>)}
