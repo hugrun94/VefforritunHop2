@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUser, fetchUserBooks } from '../../actions/users';
+import { fetchUser, fetchUserBooks, deleteReadBooks } from '../../actions/users';
 import { fetchBooks } from '../../actions/books';
 import { editUsername, editPassword } from '../../actions/register';
 import { NavLink } from 'react-router-dom';
@@ -11,6 +11,7 @@ class Profile extends Component {
     username: '',
     password: '',
     password2: '',
+    deleteRead: false,
   }
 
   handleInputChange = (e) => {
@@ -70,6 +71,15 @@ class Profile extends Component {
     }
   }
 
+  handleClickDelete = async (bookId) => {
+    const { dispatch } = this.props;
+    let { deleteRead } = this.state;
+    const { readBooks } = this.props;
+    deleteRead = true;
+    this.setState({ deleteRead });
+    dispatch(deleteReadBooks(bookId));
+  }
+
   render() {
 
     const { isAdding, user, errors, readBooks, books } = this.props;
@@ -87,7 +97,8 @@ class Profile extends Component {
             book_id: books[j].id, 
             book_title: books[j].title,
             rating: readBooks[i].rating,
-            review: readBooks[i].review, 
+            review: readBooks[i].review,
+            readBookId: readBooks[i].id, 
           });
           break;
         }
@@ -133,15 +144,25 @@ class Profile extends Component {
         <h3>Lesnar bækur</h3>
         <ul>
           {bookTitles.map((book) => (
-            <div>
-              <h3 key={book.book_id}>
-                <NavLink exact
-                    to={`/books/${book.book_id}`}>
-                    {book.book_title}
-                </NavLink>
-              </h3>
-              <p>Einkunn: {book.rating}. {book.review}</p>
-            </div>
+            
+              <li key={book.book_id}>
+                <h3 key={book.book_id}>
+                  <NavLink exact
+                      to={`/books/${book.book_id}`}>
+                      {book.book_title}
+                  </NavLink>
+                </h3>
+                <p>Einkunn: {book.rating}</p>
+                {book.review && (
+                  <p>Um bókina: {book.review}</p>
+                )}
+                {console.log(readBooks)}
+
+                <button className="button" onClick={() => this.handleClickDelete(book.readBookId)}>
+                  Eyða
+                </button>
+              </li>
+            
           ))}
         </ul>
 
