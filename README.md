@@ -5,6 +5,11 @@ Karen Ósk Pétursdóttir, kop1
 
 Ragna Ólafsdóttir, rao9
 
+# Uppsetning:
+
+Setja þarf eftirfarandi URL í .env skrá: http://salty-everglades-89080.herokuapp.com
+til að tengjast.
+
 # Hópverkefni 2
 
 Hópverkefni 2 snýst um að útbúa react framenda ofan á vefþjónustu úr hópaverkefni 1. Hægt er að nota eigin lausn áfram eða [nýta sýnilausn](https://github.com/vefforritun/vef2-2018-h1-synilausn).
