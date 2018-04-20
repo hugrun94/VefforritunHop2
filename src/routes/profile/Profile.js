@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchUser, fetchUserBooks, deleteReadBooks, addUserPhoto } from '../../actions/users';
 import { fetchBooks } from '../../actions/books';
 import { editUsername, editPassword } from '../../actions/register';
+import { logoutUser } from '../../actions/auth';
 import { NavLink } from 'react-router-dom';
 
 import Button from '../../components/button'
@@ -85,11 +86,20 @@ class Profile extends Component {
     dispatch(deleteReadBooks(bookId));
   }
 
+  logout = async () => {
+    const { dispatch } = this.props;
+    dispatch(logoutUser());
+  }
+
   render() {
 
-    const { isAdding, user, errors, readBooks, books } = this.props;
+    const { isAdding, user, error, readBooks, books } = this.props;
     const { username, password, photo } = this.state;
     const userLoggedIn = window.localStorage.getItem('user');
+
+    if (error) {
+      this.logout();
+    }
 
     let bookTitles = []
     for (let i = 0; i < readBooks.length; i++) {
@@ -179,7 +189,7 @@ const mapStateToProps = (state) => {
     user: state.users.user,
     readBooks: state.users.readBooks,
     photo: state.users.photo,
-    errors: state.users.errors,
+    error: state.users.error,
     books: state.books.books,
     isAuthenticated: state.users.isAuthenticated,
   }
