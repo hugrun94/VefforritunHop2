@@ -6,19 +6,6 @@ import { fetchBooks } from '../../actions/books';
 
 import { NavLink } from 'react-router-dom';
 
-/** 
- * Slóðin er /users/:id
- * 
- * Hér þarf að vera:
- * Nafn notanda og lítil mynd
- * 
- * User hefur: name, picture, readBooks (fylki)
- *  readBooks hefur: title, rating (int), umsögn
- * 
- * "Lesnar bækur" - hér á eftir kemur listi af bókum
- * -Titill bókar
- * -Einkunn og lítil umsögn, nokkur orð
- */
 
 const url = process.env.REACT_APP_SERVICE_URL;
 
@@ -57,7 +44,7 @@ class User extends Component {
 
   render() {
     const { user, readBooks, isFetching, error, books } = this.props;
-    // asdf gera þetta allt bara ef isAuthenticated er true!!
+
     let bookTitles = []
     for (let i = 0; i < readBooks.length; i++) {
       for (let j = 0; j < books.length; j++) {
@@ -73,7 +60,6 @@ class User extends Component {
       }
     }
 
-    console.log(readBooks)
 
     if (isFetching) {
       return (<div>Sæki notanda</div>);

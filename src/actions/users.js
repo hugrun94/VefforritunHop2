@@ -106,11 +106,10 @@ export const fetchUsers = (endpoint) => {
     let users;
     try {
       users = await get(endpoint);
-      console.log(users)
+
     } catch (e) {
       return dispatch(usersError(e))
     }
-    console.log(users)
     dispatch(receiveUsers(users.result.items));
   }
 }
@@ -140,7 +139,6 @@ export const addUserPhoto = (photo) => {
     } catch (e) {
       return dispatch(usersError(e))
     }
-    console.log(photo.result)
     dispatch(receiveUser(photo.result));
   }
 }
@@ -179,7 +177,7 @@ export const deleteReadBooks = (bookId) => {
     }
     catch(e) {
       dispatch(userBooksError(e));
-      console.log('errrrrooroooor')
+
     }
     return dispatch(fetchUserBooks('/users/me/read'));
   }

@@ -49,13 +49,10 @@ function recieveEditUsername(user) {
 export const addUser = (username,password,name) => {
   return async (dispatch) => {
     dispatch(requestUser());
-    console.log(user);
 
     let user;
     try {
       user = await post('/register', {username,password,name});
-
-      console.log(user);
 
        } catch (e) {
       return dispatch(userError(e))
@@ -63,8 +60,6 @@ export const addUser = (username,password,name) => {
     if (user.status >= 400) {
       return dispatch(userError(user.result.errors))
     }
-    console.log(user.status);
-    console.log("dfaklæka")
     return dispatch(receiveuser(user.result))
 
   }
@@ -72,8 +67,6 @@ export const addUser = (username,password,name) => {
 
 export const editUsername = (name) => {
   return async (dispatch) => {
-    //dispatch(requestUser());
-
     try {
       await patch('/users/me', {name});
 
@@ -86,7 +79,6 @@ export const editUsername = (name) => {
 
 export const editPassword = (password) => {
   return async (dispatch) => {
-    //dispatch(requestUser());
 
     try {
       await patch('/users/me', {name: null, password});

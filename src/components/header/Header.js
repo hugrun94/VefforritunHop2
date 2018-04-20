@@ -18,8 +18,6 @@ class Header extends Component {
   }
 
   onClick = (e) => {
-    console.log('leita');
-    //<Redirect to={`/books?search=${this.state.query}`} />
     return (
       <div>
       <Route path="/books" render={() => (
@@ -49,14 +47,10 @@ class Header extends Component {
   render() {
 
     const { query } = this.state;
-
     const { isAuthenticated } = this.props;
     const user = window.localStorage.getItem('user');
-    console.log(JSON.parse(user));
     const parsedUser = JSON.parse(user);
 
-
-    console.log(query)
 
     return (
       <header className="header">
@@ -103,10 +97,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Header);
-
-/*
-<Button onClick={this.onClick}>
-          <NavLink to={`/books?search=${this.state.query}`}>
-            Leita
-          </NavLink>
-        </Button>*/
