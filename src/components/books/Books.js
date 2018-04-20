@@ -98,6 +98,7 @@ class Books extends Component {
         <span>Síða {this.state.page} </span>
         <button className="button" onClick={this.handleClick}>
           <NavLink exact className="link_white"
+          // eslint-disable-next-line
             to={`/books?offset=${this.state.offset+10}`} className="pageLink">
               Næsta síða >
           </NavLink>

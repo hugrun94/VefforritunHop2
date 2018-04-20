@@ -54,7 +54,6 @@ class Header extends Component {
 
   render() {
 
-    const { query } = this.state;
     const { isAuthenticated } = this.props;
     const user = window.localStorage.getItem('user');
     const parsedUser = JSON.parse(user);
@@ -71,6 +70,7 @@ class Header extends Component {
           
           <button className="button" onClick={this.onClick}>
             <NavLink exact className="header_link"
+            // eslint-disable-next-line
               to={`/books?search=${this.state.query}`} className="search">
               Leita
             </NavLink>
