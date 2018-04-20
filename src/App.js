@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Route, NavLink, Link, Switch, withRouter } from 'react-router-dom'
 import { loginUser, logoutUser } from './actions/auth';
+import { fetchUser } from './actions/users'
 
 
 
@@ -64,6 +65,8 @@ const mapStateToProps = (state) => {
   return {
     ...state,
     isAuthenticated: state.auth.isAuthenticated,
+    user: state.users.user,
+    errors:state.users.errors,
   }
 }
 

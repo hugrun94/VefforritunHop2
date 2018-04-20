@@ -125,6 +125,9 @@ export const fetchUser = (endpoint) => {
       return dispatch(usersError(e))
     }
     
+    if (users.status === 401) {
+      return dispatch(usersError(users.result.error))
+    }
     dispatch(receiveUser(users.result));
   }
 }
