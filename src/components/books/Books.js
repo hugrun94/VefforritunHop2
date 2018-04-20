@@ -18,9 +18,9 @@ class Books extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     const query = this.props.location.search;
-    console.log(this.props.location.search)
+
     const parsedQuery = queryString.parse(query);
-    console.log(parsedQuery)
+
     if (query) {
       dispatch(fetchBooks(`/books?search=${parsedQuery.search}`));
     }
@@ -33,24 +33,26 @@ class Books extends Component {
   handleClick = async () => {
     let offset = this.state.offset + 10;
     const page = this.state.page + 1;
+
     this.setState({ offset, page });
     this.setState({ loading: true });
+
     const { dispatch } = this.props;
     offset = this.state.offset;
-    console.log(offset)
     dispatch(fetchBooks(`/books?offset=${this.state.offset+10}`));
   }
 
   handleClickPrevious = async () => {
     let offset = this.state.offset - 10;
     let page = this.state.page - 1;
+
     this.setState({ offset, page });
     this.setState({ loading: true });
+
     const { dispatch } = this.props;
     offset = this.state.offset;
     page = this.state.page;
 
-    console.log(offset, page)
 
     if (this.state.page === 1) {
       dispatch(fetchBooks(`/books?offset=${this.state.offset}`));
@@ -115,12 +117,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Books);
-
-
-/*
-<Book
-                key={book.id}
-                title={book.title}
-                onClick={(this.onHeaderClick(book.id))}
-              />
-              */

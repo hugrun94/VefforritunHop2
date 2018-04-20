@@ -32,7 +32,6 @@ class AddBook extends Component {
   handleCategoryChange = (e) => {
     const { category } = this.state;
     this.setState({ category: e.target.value });
-    console.log(category)
   }
 
   handleSubmit = async (e) => {
