@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Route, NavLink, Link, Switch, withRouter } from 'react-router-dom'
-import { loginUser, logoutUser } from './actions/auth';
-import { fetchUser } from './actions/users'
-
-
-
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 import UserRoute from './components/user-route';
 import Header from './components/header';
-
 import Home from './routes/home';
 import Login from './routes/login';
 import Profile from './routes/profile';
@@ -20,16 +14,14 @@ import Book from './components/books/Book';
 import AddBook from './components/books/AddBook';
 import User from './components/users/User';
 import Users from './components/users/Users';
-import Search from './components/search/Search';
 import NotFound from './routes/not-found';
-/* todo fleiri routes */
 
 import './App.css';
 
 class App extends Component {
 
   render() {
-    const { isAuthenticated, dispatch } = this.props; /* vita hvort notandi sé innskráður */
+    const { isAuthenticated } = this.props; 
 
     return (
       <main className="main">
@@ -71,9 +63,3 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(connect(mapStateToProps)(App));
-
-
-/*
-<UserRoute path="/books/new" isAuthenticated={isAuthenticated} component={AddBook} />
-<Route exact path="/books/new" component={AddBook} />
-*/

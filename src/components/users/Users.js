@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../../actions/users';
-import { NavLink, Route, Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-import User from './User';
 
 class Users extends Component {
 
@@ -44,11 +43,8 @@ class Users extends Component {
 
 
 
-      render(){
-        
-        const { isFetching, users, isAuthenticated } = this.props;
-
-        let token = localStorage.getItem('token');
+      render(){       
+        const { isFetching, users } = this.props;
 
         if (isFetching) {
           return (

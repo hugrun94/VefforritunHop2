@@ -1,4 +1,4 @@
-import { get, post } from '../api';
+import { get } from '../api';
 
 export const SEARCH_REQUEST = 'SEARCH_REQUEST';
 export const SEARCH_ERROR = 'SEARCH_ERROR';

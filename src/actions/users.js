@@ -82,24 +82,6 @@ function requestUserPhoto() {
   }
 }
 
-function userPhotoError(error) {
-  return {
-    type: USER_PHOTO_ERROR,
-    isFetching: true,
-    photo: null,
-    error: error,
-  }
-}
-
-function receiveUserPhoto(photo) {
-  return {
-    type: USER_PHOTO_SUCCESS,
-    isFetching: false,
-    photo,
-    error: null,
-  }
-}
-
 export const fetchUsers = (endpoint) => {
   return async (dispatch) => {
     dispatch(requestUsers());
@@ -171,7 +153,6 @@ export const updateReadBooks = (bookId, review, rating) => {
 
 export const deleteReadBooks = (bookId) => {
   return async (dispatch) => {
-    let users;
     try {
       await deleteh(`/users/me/read/${bookId}`, {bookId});
     }

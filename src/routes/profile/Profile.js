@@ -6,7 +6,6 @@ import { editUsername, editPassword } from '../../actions/register';
 import { logoutUser } from '../../actions/auth';
 import { NavLink } from 'react-router-dom';
 
-import Button from '../../components/button'
 
 class Profile extends Component {
 
@@ -40,7 +39,6 @@ class Profile extends Component {
 
     const { dispatch } = this.props;
     const { username } = this.state; 
-    const { isAuthenticated } = this.props;
 
     localStorage.setItem('user', username);
 
@@ -49,7 +47,6 @@ class Profile extends Component {
   }
 
   handleChange = async (e) => {
-    const { photo } = this.state;
     const { files } = e.target;
     this.setState({ 
       photo: files[0],
@@ -69,7 +66,6 @@ class Profile extends Component {
 
     const { dispatch } = this.props;
     const { password, password2 } = this.state;    
-    const { isAuthenticated } = this.props;
     
     if (password === password2) {
       dispatch(editPassword(password));
@@ -78,7 +74,6 @@ class Profile extends Component {
 
   handleClickDelete = async (bookId) => {
     const { dispatch } = this.props;
-    const { readBooks } = this.props;
     let { deleteRead } = this.state;
 
     deleteRead = true;
@@ -93,9 +88,8 @@ class Profile extends Component {
 
   render() {
 
-    const { isAdding, user, error, readBooks, books } = this.props;
-    const { username, password, photo } = this.state;
-    const userLoggedIn = window.localStorage.getItem('user');
+    const { isAdding, error, readBooks, books } = this.props;
+    const { username, photo } = this.state;
 
     if (error) {
       return this.logout();

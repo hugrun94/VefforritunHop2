@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchBook } from '../../actions/books';
-import { NavLink, Route, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { updateReadBooks } from '../../actions/users';
 
 import './Books.css';
@@ -55,7 +55,6 @@ class Book extends Component {
   }
 
   handleRatingChange = (e) => {
-    const { rating } = this.state;
     this.setState({ rating: e.target.value });
   }
 
@@ -72,7 +71,7 @@ class Book extends Component {
   }
 
   handleClickCancel = async () => {    
-    let { isRating, markReadDone } = this.state;
+    let { isRating } = this.state;
     isRating = false;
     this.setState({ isRating });
   }
@@ -90,7 +89,6 @@ class Book extends Component {
     if (error) {
       return (<div>Villa við að sækja bók</div>);
     }
-    const { title,  } = this.props;
 
     return (
       <section className="wrapper">
@@ -115,7 +113,7 @@ class Book extends Component {
  
         {isAuthenticated && !isRating && !markReadDone && (
         <button className="button" onClick={this.handleClickRead}>
-          Lesin bók
+          Skrá lestur
         </button>
         )}
 
@@ -141,7 +139,7 @@ class Book extends Component {
 
             <br></br>
 
-            <button className="book_button" onClick={this.handleClickMarkRead}>
+            <button className="button" onClick={this.handleClickMarkRead}>
               Vista
             </button>
 
