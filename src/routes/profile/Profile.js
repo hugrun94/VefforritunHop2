@@ -98,23 +98,30 @@ class Profile extends Component {
     const userLoggedIn = window.localStorage.getItem('user');
 
     if (error) {
-      this.logout();
+      return this.logout();
     }
 
-    let bookTitles = []
-    for (let i = 0; i < readBooks.length; i++) {
-      for (let j = 0; j < books.length; j++) {
-        if (readBooks[i].book_id === books[j].id) {
-          bookTitles.push({ 
-            book_id: books[j].id, 
-            book_title: books[j].title,
-            rating: readBooks[i].rating,
-            review: readBooks[i].review,
-            readBookId: readBooks[i].id, 
-          });
-          break;
+    let bookTitles = [];
+    try {
+      for (let i = 0; i < readBooks.length; i++) {
+        for (let j = 0; j < books.length; j++) {
+          if (readBooks[i].book_id === books[j].id) {
+            bookTitles.push({ 
+              book_id: books[j].id, 
+              book_title: books[j].title,
+              rating: readBooks[i].rating,
+              review: readBooks[i].review,
+              readBookId: readBooks[i].id, 
+            });
+            break;
+          }
         }
       }
+    }
+    catch (e) {
+      return (
+        <p>Villa við að sækja gögn</p>
+      )
     }
 
     return (
