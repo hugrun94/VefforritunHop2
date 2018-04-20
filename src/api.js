@@ -22,7 +22,7 @@ export async function get(endpoint) {
   const response = await fetch(url, options);
   const result = await response.json();
 
-  console.log(result)
+  console.log(result, response.status)
 
   return { result, status: response.status };
 }
