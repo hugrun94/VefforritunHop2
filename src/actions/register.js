@@ -22,6 +22,7 @@ function requestUser() {
     isAuthenticated: true,
     user,
     message: null,
+    validRegister: true,
   }
 }
 
