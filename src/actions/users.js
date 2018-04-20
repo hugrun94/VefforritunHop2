@@ -173,11 +173,11 @@ export const deleteReadBooks = (bookId) => {
     let users;
     try {
       await deleteh(`/users/me/read/${bookId}`, {bookId});
-      users = await get('/users/me/read');
     }
     catch(e) {
-      return dispatch(userBooksError(e));
+      dispatch(userBooksError(e));
+      console.log('errrrrooroooor')
     }
-    dispatch(receiveUserBooks(users.result.items));
+    return dispatch(fetchUserBooks('/users/me/read'));
   }
 }
