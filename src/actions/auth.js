@@ -59,8 +59,6 @@ export const loginUser = (username, password) => {
       dispatch(loginError(login.result.error))
     }
 
-    console.log(login)
-
     if (login.status === 200) {
       const { user, token } = login.result;
       localStorage.setItem('user', JSON.stringify(user));
