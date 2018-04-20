@@ -7,9 +7,7 @@ import { NavLink } from 'react-router-dom'
 
 class Search extends Component {
 
-    static propTypes = {
-        //title: PropTypes.string,
-        
+    static propTypes = {        
         match: PropTypes.shape({
           params: PropTypes.shape({
             query: PropTypes.string,
@@ -27,31 +25,12 @@ class Search extends Component {
         } = this.props;
         const { dispatch } = this.props;
         dispatch(fetchBooks(`/books?search=${query}`));
-        //dispatch(fetchBooks(`/books?search=${query}`));
     }
 
   state = { 
     page: 1,
     offset: 0,
   };
-
-  /*async componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params !== prevProps.match.params) {
-      this.setState({ loading: true });
-
-    //const { dispatch } = this.props;
-    //dispatch(fetchBooks(`/books?offset=${10 + this.state.offset}`));
-
-      try {
-        const books = await this.fetchBooks(`/books?offset=${10 + this.state.offset}`);
-        this.setState({ books, loading: false });
-      } catch (error) {
-        console.error('Error fetching book', error);
-        this.setState({ error: true, loading: false });
-      }
-    }
-  }*/
-
 
 
   handleClick = async () => {
@@ -75,7 +54,6 @@ class Search extends Component {
   render() {
     const { isFetching, booksResult } = this.props;
 
-    console.log('search')
 
     if (isFetching) {
       return (
@@ -83,8 +61,6 @@ class Search extends Component {
       );
     }
     
-    console.log(booksResult)
-
     return (
       <section>
         <h2>Bækur</h2>
@@ -130,12 +106,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Search);
-
-
-/*
-<Book
-                key={book.id}
-                title={book.title}
-                onClick={(this.onHeaderClick(book.id))}
-              />
-              */

@@ -4,8 +4,6 @@ import { loginUser, logoutUser } from '../../actions/auth';
 import { Link , Redirect, NavLink, Route} from 'react-router-dom';
 import { addUser } from '../../actions/register';
 
-/* todo sækja actions frá ./actions */
-
 import './Register.css';
 
 const user = window.localStorage.getItem('user');
@@ -38,7 +36,6 @@ state = {
   render() {
     const { username, password, name, validRegister} = this.state;
     const { isFetching, isAuthenticated, message } = this.props;
-    console.log(isAuthenticated);
 
     if (isFetching) {
       return (
@@ -57,16 +54,12 @@ state = {
       );
     }
 
- 
-
-    console.log(message)
     return (
       <div className="wrapper">
       {!validRegister && message && (
           <ul>{message.map((errors, i) => (
             <li key={i}>
               <p>{errors.message}</p>
-              {console.log(errors.message)}
             </li>
           ))}</ul>
           )}
@@ -106,7 +99,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-/* todo tengja við redux */
 export default connect(mapStateToProps)(Register);
 

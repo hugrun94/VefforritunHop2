@@ -38,21 +38,13 @@ class Profile extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { username } = this.state;
-
-    console.log(username)
-
-    //dispatch(recieveLogin(token));
-    
-    
+    const { username } = this.state; 
     const { isAuthenticated } = this.props;
-    console.log(isAuthenticated)
 
     localStorage.setItem('user', username);
 
-    //if (isAuthenticated) {
-      dispatch(editUsername(username));
-    //}
+    dispatch(editUsername(username));
+
   }
 
   handleChange = async (e) => {
@@ -65,8 +57,8 @@ class Profile extends Component {
 
   handleSubmitPhoto = (e) => {
     e.preventDefault();
+
     const { photo } = this.state;
-    console.log(photo)
     const { dispatch } = this.props;
     dispatch(addUserPhoto(photo));
   }
@@ -75,25 +67,19 @@ class Profile extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { password, password2 } = this.state;
-
-    //dispatch(recieveLogin(token));
-    
+    const { password, password2 } = this.state;    
     const { isAuthenticated } = this.props;
-    console.log(isAuthenticated)
-
     
-
     if (password === password2) {
-      console.log('lykilorð uppfært')
       dispatch(editPassword(password));
     }
   }
 
   handleClickDelete = async (bookId) => {
     const { dispatch } = this.props;
-    let { deleteRead } = this.state;
     const { readBooks } = this.props;
+    let { deleteRead } = this.state;
+
     deleteRead = true;
     this.setState({ deleteRead });
     dispatch(deleteReadBooks(bookId));
@@ -102,11 +88,8 @@ class Profile extends Component {
   render() {
 
     const { isAdding, user, errors, readBooks, books } = this.props;
-
     const { username, password, photo } = this.state;
-
     const userLoggedIn = window.localStorage.getItem('user');
-    console.log(userLoggedIn)
 
     let bookTitles = []
     for (let i = 0; i < readBooks.length; i++) {
@@ -191,7 +174,6 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state.books.book)
   return {
     isAdding: state.users.isAdding,
     user: state.users.user,

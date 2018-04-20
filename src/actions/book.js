@@ -60,22 +60,6 @@ function receiveAddBook(book) {
   }
 }
 
-// export const fetchBooks = (endpoint) => {
-//   return async (dispatch) => {
-//     dispatch(requestBooks());
-//     console.log("er að nota fetchBooks");
-//     let books;
-//     try {
-//       books = await get(endpoint);
-//     } catch (e) {
-//       return dispatch(booksError(e))
-//     }
-
-//     dispatch(receiveBooks(books.result.items, books.result.limit));
-//   }
-// }
-
-// asdf passa innskráningu
 
 export const addBook = (title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle) => {
   return async (dispatch) => {
