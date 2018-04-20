@@ -30,7 +30,6 @@ class AddBook extends Component {
   }
 
   handleCategoryChange = (e) => {
-    const { category } = this.state;
     this.setState({ category: e.target.value });
   }
 
@@ -38,12 +37,10 @@ class AddBook extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { title, author, description, category, published, pagecount, language, categorytitle } = this.state;
+    const { title, author, description, published, pagecount, language, categorytitle } = this.state;
 
 
     const { path } = this.props.match;
-
-    let token = localStorage.getItem('user');
 
     if (path === '/books/new') {
       const { isbn10, isbn13 } = this.state;
@@ -57,18 +54,12 @@ class AddBook extends Component {
   }
 
   render() {
-    const { isAdding, book, categories, errors } = this.props;
+    const { isAdding, book, errors } = this.props;
     const { category } = this.state;
     
     const { 
-      title,
-      author,
-      description,
       isbn10,
       isbn13,
-      published,
-      pagecount,
-      language,
     } = book;
 
     if (isAdding) {

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchBooks } from '../../actions/books';
 import { NavLink } from 'react-router-dom';
 
-import Book from './Book';
 import './Books.css';
 
 const queryString = require('query-string');

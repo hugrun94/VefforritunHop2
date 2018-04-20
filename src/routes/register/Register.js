@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser, logoutUser } from '../../actions/auth';
-import { Link , Redirect, NavLink, Route} from 'react-router-dom';
+import {  Redirect, Route} from 'react-router-dom';
 import { addUser } from '../../actions/register';
 
 import './Register.css';
-
-const user = window.localStorage.getItem('user');
 
 class Register extends Component {
 state = {
@@ -35,7 +32,7 @@ state = {
 
   render() {
     const { username, password, name} = this.state;
-    const { isFetching, isAuthenticated, message, validRegister } = this.props;
+    const { isFetching, message, validRegister } = this.props;
 
     if (isFetching) {
       return (

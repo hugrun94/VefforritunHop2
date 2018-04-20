@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, logoutUser } from '../../actions/auth';
-import { Link , Redirect, NavLink, Route } from 'react-router-dom';
+import { Link , Redirect, Route } from 'react-router-dom';
 
 /* todo sækja actions frá ./actions */
 
 import './Login.css';
-import Home from '../home';
-import Books from '../../components/books/Books';
 
 class Login extends Component {
 state = {
@@ -26,7 +24,7 @@ state = {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { dispatch, isAuthenticated } = this.props;
+    const { dispatch } = this.props;
     const { username, password } = this.state;
 
     dispatch(loginUser(username, password));
@@ -39,7 +37,7 @@ state = {
 
   render() {
     const { username, password } = this.state;
-    const { dispatch, isFetching, isAuthenticated, message } = this.props;
+    const { isFetching, isAuthenticated, message } = this.props;
 
     if (isAuthenticated) {
       return (

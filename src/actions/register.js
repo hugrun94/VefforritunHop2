@@ -1,5 +1,4 @@
 import { post, patch } from '../api';
-import { Route, Redirect } from 'react-router'
 export const NEWUSER_REQUEST = 'NEWUSER_REQUEST';
 export const NEWUSER_ERROR = 'NEWUSER_ERROR';
 export const NEWUSER_FAILURE = 'NEWUSER_FAILURE';
@@ -32,16 +31,6 @@ function userError(message) {
     isFetching: false,
     isAuthenticated: false,
     message
-  }
-}
-
-function recieveEditUsername(user) {
-  return {
-    type: EDIT_USERNAME,
-    isFetching: false,
-    isAuthenticated: true,
-    user,
-    message: null,
   }
 }
 

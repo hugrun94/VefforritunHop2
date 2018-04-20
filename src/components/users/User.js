@@ -7,8 +7,6 @@ import { fetchBooks } from '../../actions/books';
 import { NavLink } from 'react-router-dom';
 
 
-const url = process.env.REACT_APP_SERVICE_URL;
-
 class User extends Component {
   static propTypes = {
     name: PropTypes.string,
