@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBooks } from '../../actions/books';
 import { logoutUser } from '../../actions/auth';
 
 import { Link, NavLink, Redirect, Route } from 'react-router-dom';
 
-import Button from '../button';
-
 import './Header.css';
-
-const queryString = require('query-string');
 
 class Header extends Component {
 
@@ -20,7 +15,7 @@ class Header extends Component {
   onClick = (e) => {
     return (
       <div>
-      <Route path="/books" render={() => (
+      <Route path="/" render={() => (
         <div>
           <Redirect to={`/books?search=${this.state.query}`}/>
           </div>
@@ -31,6 +26,19 @@ class Header extends Component {
 
   }
 
+  handleSubmit = (e) => {
+    return (
+      <div>
+      <Route path="/" render={() => (
+        <div>
+          <Redirect to={`/books?search=${this.state.query}`}/>
+          </div>
+      )}/>
+      
+      </div>
+    );
+  }
+ 
   handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -58,15 +66,16 @@ class Header extends Component {
 
         {/* ætti samt frekar heima í sér component */}
         <div className="search_div">
-          <form className="header_form">
+          <form className="header_form" onSubmit={this.onClick}>
             <input id="search" type="text" name="query" onChange={this.handleInputChange} />
-          </form>
+          
           <button className="button" onClick={this.onClick}>
             <NavLink exact className="header_link"
               to={`/books?search=${this.state.query}`} className="search">
               Leita
             </NavLink>
           </button>
+          </form>
         </div>
         
         {isAuthenticated &&
