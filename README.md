@@ -158,3 +158,4 @@ Skilaboð skulu innihalda slóð á GitHub repo fyrir verkefni, og kennurum skal
 Sett verða fyrir fimm minni verkefni þar sem fjögur bestu gilda 7,5% hvert, samtals 30% af lokaeinkunn.
 
 Sett verða fyrir tvö hópa verkefni þar sem hvort um sig gildir 15%, samtals 30% af lokaeinkunn.
+
