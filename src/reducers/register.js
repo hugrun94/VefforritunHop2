@@ -5,6 +5,7 @@ const initialState = {
 	isFetching: false,
   	isAuthenticated: user ? true : false,
   	user,
+    validRegister:false,
 };
 
 export default (state = initialState, action) => {
@@ -26,6 +27,7 @@ export default (state = initialState, action) => {
         isAuthenticated: action.isAuthenticated,
         user: action.user,
         message: action.message,
+        validRegister: action.validRegister,
       };
     case NEWUSER_FAILURE:
     console.log(action)

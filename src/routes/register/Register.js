@@ -34,16 +34,17 @@ state = {
   }
 
   render() {
-    const { username, password, name, validRegister} = this.state;
-    const { isFetching, isAuthenticated, message } = this.props;
-
+    const { username, password, name} = this.state;
+    const { isFetching, isAuthenticated, message, validRegister } = this.props;
+    console.log(validRegister)
     if (isFetching) {
       return (
         <p>Skráir notenda <em>{username}</em>...</p>
       );
     }
 
-    if (!message && validRegister) {
+    if (validRegister) {
+      console.log("register")
       return (
         <div>
         <Route exact path="/register" render={() => (
@@ -96,6 +97,7 @@ const mapStateToProps = (state) => {
     isFetching: state.auth.isFetching,
     isAuthenticated: state.auth.isAuthenticated,
     message: state.register.message,
+    validRegister: state.register.validRegister,
   }
 }
 
