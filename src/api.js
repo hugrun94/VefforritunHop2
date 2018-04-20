@@ -1,5 +1,5 @@
 
-const baseurl = 'https://vefforritunar-api.herokuapp.com';
+const baseurl = process.env.REACT_APP_SERVICE_URL;
 
 export async function get(endpoint) {
   const token = window.localStorage.getItem('token');
