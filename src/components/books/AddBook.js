@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { addBook, editBook, fetchCategories } from '../../actions/books';
 import { NavLink } from 'react-router-dom'
 
+// eslint-disable-next-line
+import Button from '../button';
+
 class AddBook extends Component {
 
   state = {

@@ -6,7 +6,8 @@ import { editUsername, editPassword } from '../../actions/register';
 import { logoutUser } from '../../actions/auth';
 import { NavLink } from 'react-router-dom';
 
-
+// eslint-disable-next-line
+import Button from '../../components/button';
 class Profile extends Component {
 
   state = {
