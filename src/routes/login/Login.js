@@ -40,9 +40,6 @@ state = {
   render() {
     const { username, password } = this.state;
     const { dispatch, isFetching, isAuthenticated, message } = this.props;
-    console.log(message);
-
-
 
     if (isAuthenticated) {
       return (
@@ -61,8 +58,6 @@ state = {
         <p>Skrái inn <em>{username}</em>...</p>
       );
     }
-
-    console.log(message)
 
     return (
       <div className="wrapper">

@@ -9,8 +9,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-
-    /* todo setja upp reducer */
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -18,7 +16,6 @@ export default (state = initialState, action) => {
         isAuthenticated: action.isAuthenticated,
       };
     case LOGIN_SUCCESS:
-    console.log(action)
       return {
         ...state,
         isFetching: action.isFetching,

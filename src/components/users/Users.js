@@ -5,8 +5,6 @@ import { NavLink, Route, Redirect } from 'react-router-dom'
 
 import User from './User';
 
-console.log("HALLO");
-
 class Users extends Component {
 
     state = {
@@ -50,9 +48,7 @@ class Users extends Component {
         
         const { isFetching, users, isAuthenticated } = this.props;
 
-        console.log(users)
         let token = localStorage.getItem('token');
-        console.log('token hallo', token  )
 
         if (isFetching) {
           return (
@@ -60,9 +56,6 @@ class Users extends Component {
           );
         }
 
-        console.log("offset: ", this.state.offset)
-        console.log("page: ", this.state.page)
-        console.log("users: ", users) // asdf fjarlægja
         return (
           <section className="wrapper">
             <h2>Notendur</h2><br></br>
@@ -100,7 +93,7 @@ class Users extends Component {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state.users)
+
   return {
     isFetching: state.users.isFetching,
     users: state.users.users,

@@ -10,8 +10,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-
-    /* todo setja upp reducer */
     case NEWUSER_REQUEST:
       return {
         ...state,
@@ -19,8 +17,6 @@ export default (state = initialState, action) => {
         isAuthenticated: action.isAuthenticated,
       };
     case NEWUSER_SUCCESS:
-    console.log(action)
-    console.log("fad")
       return {
         ...state,
         isFetching: action.isFetching,
@@ -30,7 +26,6 @@ export default (state = initialState, action) => {
         validRegister: action.validRegister,
       };
     case NEWUSER_FAILURE:
-    console.log(action)
       return {
         ...state,
         isFetching: action.isFetching,
