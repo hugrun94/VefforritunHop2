@@ -130,7 +130,6 @@ function receiveEditBook(book) {
 
 
 export const fetchBooks = (endpoint) => {
-  console.log(endpoint)
   return async (dispatch) => {
     dispatch(requestBooks());
     let books;
@@ -169,7 +168,6 @@ export const fetchCategories = (endpoint) => {
     } catch (e) {
       return dispatch(categoriesError(e));
     }
-    console.log(categories)
     dispatch(recieveCategories(categories.result.items));
   }
 }
@@ -179,11 +177,9 @@ export const fetchCategories = (endpoint) => {
 export const addBook = (title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle) => {
   return async (dispatch) => {
     dispatch(addingBook());
-    console.log(title)
     let book;
     try {
       book = await post('/books', { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle });
-      console.log(book.result)
     } catch (e) {
       return dispatch(addBooksError([{ message: e }]))
     }
@@ -199,11 +195,9 @@ export const addBook = (title, author, descr, ISBN10, ISBN13, category, publishe
 export const editBook = (id, title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle) => {
   return async (dispatch) => {
     dispatch(editingBook());
-    console.log(title)
     let book;
     try {
       book = await patch(`/books/${id}`, { title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle });
-      console.log(book.result)
     } catch (e) {
       return dispatch(editBooksError([{ message: e }]))
     }

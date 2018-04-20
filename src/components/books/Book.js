@@ -7,7 +7,6 @@ import { updateReadBooks } from '../../actions/users';
 
 import './Books.css';
 
-//const url = process.env.REACT_APP_SERVICE_URL;
 
 class Book extends Component {
   static propTypes = {
@@ -65,6 +64,7 @@ class Book extends Component {
     const { dispatch } = this.props;
     let { review, rating, markReadDone } = this.state;
     const { book } = this.props;
+
     markReadDone = true;
     this.setState({ markReadDone });
     rating = Number(rating);
@@ -80,7 +80,6 @@ class Book extends Component {
 
   render() {
     const { book, loading, error,isAuthenticated } = this.props;
-    console.log(isAuthenticated)
 
     const { isRating, review, rating, markReadDone } = this.state;
 

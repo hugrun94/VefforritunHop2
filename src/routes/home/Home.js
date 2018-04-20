@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 class Home extends Component {
 
   render() {
-  	//const { username, password } = this.state;
-    //const { isFetching, isAuthenticated, message } = this.props;
+  	
     const token = window.localStorage.getItem('user');
-		console.log(token);
     if(token != null){
     	return (
 	      <div className="wrapper">
@@ -28,5 +26,4 @@ class Home extends Component {
   }
 }
 
-/* todo setja upp tengingu við redux til að vita stöðu notanda */
 export default Home;
