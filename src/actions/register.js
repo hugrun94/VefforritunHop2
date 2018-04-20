@@ -27,7 +27,6 @@ function requestUser() {
 }
 
 function userError(message) {
-  console.log(message)
   return {
     type: NEWUSER_FAILURE,
     isFetching: false,
