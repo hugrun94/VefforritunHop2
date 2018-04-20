@@ -89,6 +89,7 @@ class Book extends Component {
     }
 
     if (error) {
+      console.log(error)
       return (<div>Villa við að sækja bók</div>);
     }
     const { title,  } = this.props;
