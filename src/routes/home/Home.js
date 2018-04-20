@@ -16,7 +16,7 @@ class Home extends Component {
 	    );
     }else{
     	return (
-	      <div>
+	      <div className="wrapper">
 	        <h2>Velkomin á bókasafnið</h2>
 	        <p>Til að njóta bókasafnisins til fullnustu mælum við með að <NavLink to="/login">skrá sig inn</NavLink> Þangað til getur þú skoðað <NavLink to ="/books">allar bækurnar</NavLink>.</p>
 	      </div>
