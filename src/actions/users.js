@@ -1,4 +1,4 @@
-import { get, post, deleteh } from '../api';
+import { get, post, deleteh, postPhoto } from '../api';
 
 export const USERS_REQUEST = 'USERS_REQUEST';
 export const USERS_ERROR = 'USERS_ERROR';
@@ -8,6 +8,9 @@ export const USER_READ_REQUEST = 'USER_READ_REQUEST';
 export const USER_READ_ERROR = 'USER_READ_ERROR';
 export const USER_READ_SUCCESS = 'USER_READ_SUCCESS';
 export const USER_READ_UPDATE_SUCCESS = 'USER_READ_UPDATE_SUCCESS';
+export const USER_PHOTO_REQUEST = 'USER_PHOTO_REQUEST';
+export const USER_PHOTO_ERROR = 'USER_PHOTO_ERROR';
+export const USER_PHOTO_SUCCESS = 'USER_PHOTO_SUCCESS';
 
 
 function requestUsers() {
@@ -71,6 +74,32 @@ function receiveUserBooks(readBooks) {
   }
 }
 
+function requestUserPhoto() {
+  return {
+    type: USER_PHOTO_REQUEST,
+    isFetching: true,
+    error: null,
+  }
+}
+
+function userPhotoError(error) {
+  return {
+    type: USER_PHOTO_ERROR,
+    isFetching: true,
+    photo: null,
+    error: error,
+  }
+}
+
+function receiveUserPhoto(photo) {
+  return {
+    type: USER_PHOTO_SUCCESS,
+    isFetching: false,
+    photo,
+    error: null,
+  }
+}
+
 export const fetchUsers = (endpoint) => {
   return async (dispatch) => {
     dispatch(requestUsers());
@@ -100,6 +129,20 @@ export const fetchUser = (endpoint) => {
   }
 }
 
+export const addUserPhoto = (photo) => {
+  return async (dispatch) => {
+    dispatch(requestUserPhoto());
+    try {
+      await postPhoto('/users/me/profile', photo);
+    } catch (e) {
+      return dispatch(usersError(e))
+    }
+    console.log(photo.result)
+    dispatch(receiveUser(photo.result));
+  }
+}
+
+
 export const fetchUserBooks = (endpoint) => {
   return async (dispatch) => {
     dispatch(requestUserBooks());
@@ -127,11 +170,14 @@ export const updateReadBooks = (bookId, review, rating) => {
 
 export const deleteReadBooks = (bookId) => {
   return async (dispatch) => {
+    let users;
     try {
       await deleteh(`/users/me/read/${bookId}`, {bookId});
     }
     catch(e) {
-      return dispatch(userBooksError(e));
+      dispatch(userBooksError(e));
+      console.log('errrrrooroooor')
     }
+    return dispatch(fetchUserBooks('/users/me/read'));
   }
 }
