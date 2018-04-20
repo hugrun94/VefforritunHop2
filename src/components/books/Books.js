@@ -77,8 +77,8 @@ class Books extends Component {
         <h2>Bækur</h2><br></br>
         <ul>
           {books.map((book) => (
-            <div>
-              <h3 key={book.id}>
+            <div key={book.id}>
+              <h3>
                 <NavLink exact
                   to={`/books/${book.id}`}>
                   {book.title}
