@@ -4,11 +4,7 @@ const baseurl = process.env.REACT_APP_SERVICE_URL;
 export async function get(endpoint) {
   const token = window.localStorage.getItem('token');
 
-  console.log(token)
-
   const url = `${baseurl}${endpoint}`;
-
-  console.log(url)
 
   const options = {
     headers: {},
@@ -21,8 +17,6 @@ export async function get(endpoint) {
   /* todo framkvæma get */
   const response = await fetch(url, options);
   const result = await response.json();
-
-  console.log(result, response.status)
 
   return { result, status: response.status };
 }
@@ -54,13 +48,9 @@ export async function get(endpoint) {
 
 export async function post(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
-  console.log(data);
-  console.log(url);
 
 
   const token = window.localStorage.getItem('token');
-  console.log(token)
-
   const options = {
     body: JSON.stringify(data),
     headers: {
@@ -71,13 +61,10 @@ export async function post(endpoint, data) {
 
   if (token) {
     options.headers['Authorization'] = `Bearer ${token}`;
-    console.log('token halló:', token)
   }
 
   const response = await fetch(url, options);
   const result = await response.json();
-  //console.log(response);
-  //console.log(result);
 
   return { result, status: response.status };
 }
@@ -85,12 +72,7 @@ export async function post(endpoint, data) {
 
 export async function postPhoto(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
-  console.log(data);
-  console.log(url);
-
   const token = window.localStorage.getItem('token');
-  console.log(token)
-
   const options = {
     body: data,
     headers: {
@@ -100,13 +82,10 @@ export async function postPhoto(endpoint, data) {
 
   if (token) {
     options.headers['Authorization'] = `Bearer ${token}`;
-    console.log('token halló:', token)
   }
 
   const response = await fetch(url, options);
   const result = await response.json();
-  //console.log(response);
-  //console.log(result);
 
   return { result, status: response.status };
 }
@@ -114,12 +93,7 @@ export async function postPhoto(endpoint, data) {
 
 export async function patch(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
-  console.log(data);
-  console.log(url);
-
-
   const token = window.localStorage.getItem('token');
-  console.log(token)
 
   const options = {
     body: JSON.stringify(data),
@@ -131,26 +105,17 @@ export async function patch(endpoint, data) {
 
   if (token) {
     options.headers['Authorization'] = `Bearer ${token}`;
-    console.log('token halló:', token)
   }
-
-  console.log(options)
 
 
   const response = await fetch(url, options);
   const result = await response.json();
-  //console.log(response);
-  //console.log(result);
 
   return { result, status: response.status };
 }
 
 export async function deleteh(endpoint, data) {
   const url = `${baseurl}${endpoint}`;
-  console.log(data);
-  console.log(url);
-
-
   const token = window.localStorage.getItem('token');
 
   const options = {
@@ -163,17 +128,10 @@ export async function deleteh(endpoint, data) {
 
   if (token) {
     options.headers['Authorization'] = `Bearer ${token}`;
-    console.log('token halló:', token)
   }
-
-  console.log(options)
-
 
   const response = await fetch(url, options);
   const result = await response.json();
-  //console.log(response);
-  //console.log(result);
-
   return { result, status: response.status };
 }
 

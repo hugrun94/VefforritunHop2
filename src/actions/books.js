@@ -172,8 +172,6 @@ export const fetchCategories = (endpoint) => {
   }
 }
 
-// asdf passa innskráningu
-
 export const addBook = (title, author, descr, ISBN10, ISBN13, category, published, pagecount, language, categorytitle) => {
   return async (dispatch) => {
     dispatch(addingBook());
