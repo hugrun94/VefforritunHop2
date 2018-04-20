@@ -98,7 +98,7 @@ class Profile extends Component {
     const userLoggedIn = window.localStorage.getItem('user');
 
     if (error) {
-      this.logout();
+      return this.logout();
     }
 
     let bookTitles = []
