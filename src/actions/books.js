@@ -153,7 +153,9 @@ export const fetchBook = (endpoint) => {
     } catch (e) {
       return dispatch(booksError(e))
     }
-    
+    if (books.status >= 400) {
+      return dispatch(booksError(books.result.error))
+    }
     dispatch(receiveBook(books.result));
   }
 }
