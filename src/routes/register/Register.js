@@ -36,7 +36,7 @@ state = {
   render() {
     const { username, password, name} = this.state;
     const { isFetching, isAuthenticated, message, validRegister } = this.props;
-    console.log(validRegister)
+
     if (isFetching) {
       return (
         <p>Skráir notenda <em>{username}</em>...</p>
@@ -44,7 +44,6 @@ state = {
     }
 
     if (validRegister) {
-      console.log("register")
       return (
         <div>
         <Route exact path="/register" render={() => (
